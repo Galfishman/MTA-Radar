@@ -21,7 +21,6 @@ Name = st.sidebar.selectbox(
 Name2 = st.sidebar.selectbox(
     "Select other Player:",
     options=df["Player"].unique(),
-    default = ("E. Zehavi")
 )
 
 # List of all available parameters
