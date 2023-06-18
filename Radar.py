@@ -8,7 +8,7 @@ import matplotlib as mpl
 
 st.title("Try streamlit")
 # READ DATA
-df = pd.read_csv('Desktop/Wing2.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Wing2.csv')
 
 st.dataframe(df)
 
