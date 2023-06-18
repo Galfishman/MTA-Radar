@@ -6,9 +6,9 @@ from mplsoccer import PyPizza
 
 import matplotlib as mpl
 
-st.title("MTA RADAR")
+st.title("Try streamlit")
 # READ DATA
-df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Wing2.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 st.dataframe(df)
 
@@ -24,7 +24,7 @@ Name2 = st.sidebar.selectbox(
 )
 
 # List of all available parameters
-all_params = list(df.columns[3:])
+all_params = list(df.columns[5:])
 
 # Filtered parameters based on user selection
 selected_params = st.sidebar.multiselect(
@@ -58,17 +58,7 @@ a_values = a_values[:]
 b_values = b_values[:]
 values = [a_values, b_values]
 
-# Check and adjust ranges
-for i in range(len(ranges)):
-    if values[0][i] < ranges[i][0]:
-        ranges[i] = (values[0][i], ranges[i][1])
-    if values[0][i] > ranges[i][1]:
-        ranges[i] = (ranges[i][0], values[0][i])
 
-    if values[1][i] < ranges[i][0]:
-        ranges[i] = (values[1][i], ranges[i][1])
-    if values[1][i] > ranges[i][1]:
-        ranges[i] = (ranges[i][0], values[1][i])
 
 # Print values for troubleshooting
 
@@ -82,11 +72,16 @@ minutes_player1 = df.loc[df['Player'] == Name, minutes_name].values[0]
 minutes_player2 = df.loc[df['Player'] == Name2, minutes_name].values[0]
 
 
+Position_name = "Position"
+Position_name1 = df.loc[df['Player'] == Name, Position_name].values[0]
+Position_name2 = df.loc[df['Player'] == Name2, Position_name].values[0]
+
+
 # Update the title dictionary with minutes played
 title = dict(
-    title_name=f"{Name}\n({league_player1})\n({minutes_player1} Minutes)",
+    title_name=f"{Name}\n{'Position: ' + Position_name1}\n{'League: '+league_player1}\n{minutes_player1} Minutes Played",
     title_color='yellow',
-    title_name_2=f"{Name2}\n({league_player2})\n({minutes_player2} Minutes)",
+    title_name_2=f"{Name2}\n{'Position: ' + Position_name2}\n{'League: '+league_player2}\n{minutes_player2} Minutes Played",
     title_color_2='blue',
     title_fontsize=18,
 )
