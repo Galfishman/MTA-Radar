@@ -98,7 +98,7 @@ radar = Radar(
     background_color="#121212",
     patch_color="#28252C",
     label_color="#FFFFFF",
-    label_fontsize=6.3,
+    label_fontsize=8,
     range_color="#FFFFFF"
 )
 
