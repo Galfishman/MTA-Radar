@@ -8,7 +8,7 @@ import matplotlib as mpl
 
 st.title("MTA Radar Compression")
 # READ DATA
-df = pd.read_csv('/Users/galfishman/Desktop/MTA STREAMLIT/DataBase.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 st.dataframe(df)
 
