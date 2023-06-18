@@ -10,9 +10,7 @@ import matplotlib as mpl
 mpl.rcParams['figure.dpi'] = 800
 
 #READ DATA
-df = pd.read_csv('https://github.com/Galfishman/MTA-Radar/blob/main/Wing2.csv')
-
-
+df = pd.read_csv('df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Wing2.csv')
 st.dataframe(df)
 
 st.sidebar.header("Please Filter Here:")
