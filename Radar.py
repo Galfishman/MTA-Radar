@@ -1,27 +1,16 @@
 import streamlit as st
 
 st.title ("Try streamlit") 
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from soccerplots.radar_chart import Radar
-from highlight_text import fig_text
-
-from mplsoccer import PyPizza, FontManager
+from mplsoccer import PyPizza
 
 import matplotlib as mpl
 mpl.rcParams['figure.dpi'] = 800
 
-#FONT LOAD
-font_normal = FontManager(("https://github.com/google/fonts/blob/main/apache/roboto/static/"
-                           "Roboto-Regular.ttf?raw=true"))
-font_italic = FontManager(("https://github.com/google/fonts/blob/main/apache/roboto/static/"
-                           "Roboto-Italic.ttf?raw=true"))
-font_bold = FontManager(("https://github.com/google/fonts/blob/main/apache/roboto/static/"
-                         "Roboto-Medium.ttf?raw=true"))
-
 #READ DATA
-df = pd.read_csv('/Users/galfishman/Desktop/Wingers another one/Wing2.csv')
+df = pd.read_csv('https://github.com/Galfishman/MTA-Radar/blob/main/Wing2.csv')
 
 
 st.dataframe(df)
