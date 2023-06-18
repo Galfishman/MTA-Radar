@@ -5,7 +5,7 @@ st.title ("MTA Pizza Compression")
 import pandas as pd
 import matplotlib.pyplot as plt
 from soccerplots.radar_chart import Radar
-
+from highlight_text import fig_text
 from mplsoccer import PyPizza, FontManager
 
 import matplotlib as mpl
