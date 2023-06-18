@@ -71,12 +71,21 @@ for i in range(len(ranges)):
         ranges[i] = (ranges[i][0], values[1][i])
 
 # Print values for troubleshooting
+# Find the minutes played for the selected players
+League_player = "League"
+league_player1 = df.loc[df['Player'] == Name, League_player].values[0]
+league_player2 = df.loc[df['Player'] == Name2, League_player].values[0]
 
-# TITLE AND TEXT CHANGE
+minutes_name = "Minutes played"
+minutes_player1 = df.loc[df['Player'] == Name, minutes_name].values[0]
+minutes_player2 = df.loc[df['Player'] == Name2, minutes_name].values[0]
+
+
+# Update the title dictionary with minutes played
 title = dict(
-    title_name=Name,
+    title_name=f"{Name}\n({league_player1})\n({minutes_player1} Minutes)",
     title_color='yellow',
-    title_name_2=Name2,
+    title_name_2=f"{Name2}\n({league_player2})\n({minutes_player2} Minutes)",
     title_color_2='blue',
     title_fontsize=18,
 )
