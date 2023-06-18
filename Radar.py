@@ -6,9 +6,9 @@ from mplsoccer import PyPizza
 
 import matplotlib as mpl
 
-st.title("MTA Radar Try")
+st.title("Try streamlit")
 # READ DATA
-df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Wing2.csv')
+df = pd.read_csv('Desktop/Wing2.csv')
 
 st.dataframe(df)
 
@@ -24,7 +24,7 @@ Name2 = st.sidebar.selectbox(
 )
 
 # List of all available parameters
-all_params = list(df.columns[2:])
+all_params = list(df.columns[3:])
 
 # Filtered parameters based on user selection
 selected_params = st.sidebar.multiselect(
@@ -71,6 +71,7 @@ for i in range(len(ranges)):
         ranges[i] = (ranges[i][0], values[1][i])
 
 # Print values for troubleshooting
+
 # Find the minutes played for the selected players
 League_player = "League"
 league_player1 = df.loc[df['Player'] == Name, League_player].values[0]
@@ -89,7 +90,6 @@ title = dict(
     title_color_2='blue',
     title_fontsize=18,
 )
-
 # RADAR PLOT
 radar = Radar(
     background_color="#121212",
