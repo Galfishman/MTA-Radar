@@ -37,7 +37,7 @@ nest-asyncio==1.5.5
 notebook==6.4.11
 numpy==1.22.3
 packaging==21.3
-pandas==1.4.2
+pandas==1.4.3
 pandocfilters==1.5.0
 parso==0.8.3
 pexpect==4.8.0
@@ -68,7 +68,6 @@ webencodings==0.5.1
 highlight_text==0.0.5
 matplotlib==3.5.2
 mplsoccer==1.0.6
-pandas==1.4.3
 session_info==1.0.0
 soccerplots==1.0.0
 streamlit==1.23.1
