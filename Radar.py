@@ -24,7 +24,7 @@ Name2 = st.sidebar.selectbox(
 )
 
 # List of all available parameters
-all_params = list(df.columns[5:])
+all_params = list(df.columns[7:])
 
 # Filtered parameters based on user selection
 selected_params = st.sidebar.multiselect(
@@ -76,6 +76,9 @@ Position_name = "Position"
 Position_name1 = df.loc[df['Player'] == Name, Position_name].values[0]
 Position_name2 = df.loc[df['Player'] == Name2, Position_name].values[0]
 
+Team_name = "Team"
+team_name1 = df.loc[df['Player'] == Name, Team_name].values[0]
+team_name2 = df.loc[df['Player'] == Name2, Team_name].values[0]
 
 #Team_name = "Team"
 #Team_name1 = df.loc[df['Player'] == Name, Team_name].values[0]
@@ -84,9 +87,9 @@ Position_name2 = df.loc[df['Player'] == Name2, Position_name].values[0]
 
 # Update the title dictionary with minutes played
 title = dict(
-    title_name=f"{Name}\n{'Position: ' + Position_name1}\n{'League: '+league_player1}\n{minutes_player1} Minutes Played",
+    title_name=f"{Name}\n{'Team: ' + team_name1}\n{'Position: ' + Position_name1}\n{'League: '+league_player1}\n{minutes_player1} Minutes Played",
     title_color='yellow',
-    title_name_2=f"{Name2}\n{'Position: ' + Position_name2}\n{'League: '+league_player2}\n{minutes_player2} Minutes Played",
+    title_name_2=f"{Name2}\n{'Team: ' + team_name2}\n{'Position: ' + Position_name2}\n{'League: '+league_player2}\n{minutes_player2} Minutes Played",
     title_color_2='blue',
     title_fontsize=18,
 )
