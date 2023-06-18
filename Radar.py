@@ -30,8 +30,8 @@ all_params = list(df.columns[2:])
 selected_params = st.sidebar.multiselect(
     "Select Parameters:",
     options=all_params,
-    default=None  # Default value is all_params (all parameters selected)
-)
+    default= ("Crosses per 90", "Shots per 90", "xG per 90"))  # Default value is all_params (all parameters selected)
+
 params = selected_params
 
 # add ranges to list of tuple pairs
