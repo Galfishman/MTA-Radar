@@ -6,7 +6,7 @@ from mplsoccer import PyPizza
 
 import matplotlib as mpl
 
-st.title("Try streamlit")
+st.title("MTA RADAR")
 # READ DATA
 df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Wing2.csv')
 
