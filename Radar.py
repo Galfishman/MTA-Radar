@@ -1,16 +1,15 @@
-import streamlit as st
-
-st.title ("Try streamlit") 
 import pandas as pd
 import matplotlib.pyplot as plt
+import streamlit as st
 from soccerplots.radar_chart import Radar
 from mplsoccer import PyPizza
 
 import matplotlib as mpl
-mpl.rcParams['figure.dpi'] = 800
 
-#READ DATA
-df = pd.read_csv('df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Wing2.csv')
+st.title("MTA Radar Try")
+# READ DATA
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Wing2.csv')
+
 st.dataframe(df)
 
 st.sidebar.header("Please Filter Here:")
@@ -19,7 +18,10 @@ Name = st.sidebar.selectbox(
     "Select the Player:",
     options=df["Player"].unique(),
 )
-
+Name2 = st.sidebar.selectbox(
+    "Select other Player:",
+    options=df["Player"].unique(),
+)
 
 # List of all available parameters
 all_params = list(df.columns[2:])
@@ -32,104 +34,76 @@ selected_params = st.sidebar.multiselect(
 )
 params = selected_params
 
-
-#LIST OF VALUES
+# add ranges to list of tuple pairs
 ranges = []
-values = []
-values_2 = []
-min_range = []
-max_range = []
+a_values = []
+b_values = []
 
+for x in params:
+    a = min(df[x])
+    a = a - (a * 0.2)
 
-min_range = []
-max_range = []
+    b = max(df[x])
+    b = b
 
-for param in params:
-    a = min(df[param])
-    b = max(df[param])
-    min_range.append(a)
-    max_range.append(b)
+    ranges.append((a, b))
 
-    
-selected_columns = ['Player'] + selected_params
-
-    
 for x in range(len(df['Player'])):
     if df['Player'][x] == Name:
-        values = df.loc[df['Player'] == Name, selected_columns].values.tolist()[0][1:]
+        a_values = df.loc[df['Player'] == Name, params].values.tolist()[0][:]
+    if df['Player'][x] == Name2:
+        b_values = df.loc[df['Player'] == Name2, params].values.tolist()[0][:]
 
+a_values = a_values[:]
+b_values = b_values[:]
+values = [a_values, b_values]
 
+# Check and adjust ranges
+for i in range(len(ranges)):
+    if values[0][i] < ranges[i][0]:
+        ranges[i] = (values[0][i], ranges[i][1])
+    if values[0][i] > ranges[i][1]:
+        ranges[i] = (ranges[i][0], values[0][i])
 
-#ALL PIZZA MAKING
-# color for the slices and text
-num_params = len(selected_params)
-slice_colors = ["#1A78CF"] * num_params
-text_colors = ["#000000"] * num_params
+    if values[1][i] < ranges[i][0]:
+        ranges[i] = (values[1][i], ranges[i][1])
+    if values[1][i] > ranges[i][1]:
+        ranges[i] = (ranges[i][0], values[1][i])
 
-# instantiate PyPizza class
-baker = PyPizza(
-    params=params,                  # list of parameters
-    min_range=min_range,        # min range values
-    max_range=max_range,        # max range values
-    background_color="#EBEBE9",     # background color
-    straight_line_color="#EBEBE9",  # color for straight lines
-    straight_line_lw=1,             # linewidth for straight lines
-    last_circle_lw=2,               # linewidth of last circle
-    last_circle_color='white',               # linewidth of last circle
-    other_circle_lw=0,              # linewidth for other circles
-    inner_circle_size=20            # size of inner circle
+# Print values for troubleshooting
+
+# TITLE AND TEXT CHANGE
+title = dict(
+    title_name=Name,
+    title_color='yellow',
+    title_name_2=Name2,
+    title_color_2='blue',
+    title_fontsize=18,
 )
 
-# plot pizza
-# Plot pizza
-# Plot pizza
-fig, ax = baker.make_pizza(
-    values,
-    figsize=(8, 8.5),
-    color_blank_space="same",
-    slice_colors=slice_colors,
-    value_colors=text_colors,
-    value_bck_colors=slice_colors,
-    blank_alpha=0.4,
-    kwargs_slices=dict(edgecolor="#F2F2F2", zorder=2, linewidth=1),
-    kwargs_params=dict(
-        color="#000000", fontsize=7, fontproperties=font_normal.prop, va="center"
-    ),
-    kwargs_values=dict(
-        color="#000000",
-        fontsize=9,
-        fontproperties=font_normal.prop,
-        zorder=3,
-        bbox=dict(
-            edgecolor="#000000",
-            facecolor="cornflowerblue",
-            boxstyle="round,pad=0.3",
-            lw=1,
-        ),
-    ),
+# RADAR PLOT
+radar = Radar(
+    background_color="#121212",
+    patch_color="#28252C",
+    label_color="#FFFFFF",
+    label_fontsize=6.3,
+    range_color="#FFFFFF"
 )
 
-#params_offset = [ True,True,True,False,True,False,True,False,False,
- #               False,False,True,True]
-
-#baker.adjust_texts(params_offset, offset=-0.20)
-
-
-# add title
-fig_text(
-    0.515, 1, Name + "  Radar",
-    size=16, fig=fig,
-    
-    ha="center", fontproperties=font_bold.prop, color= 'Black'
+# plot radar
+fig, ax = radar.plot_radar(
+    ranges=ranges,
+    params=params,
+    values=values,
+    radar_color=['yellow', 'blue'],
+    edgecolor="#222222",
+    zorder=2,
+    linewidth=1,
+    title=title,
+    alphas=[0.4, 0.4],
+    compare=True
 )
 
-# add subtitle
-fig.text(
-    0.515, 0.950,
-    "",
-    size=15,
-    ha="center", fontproperties=font_bold.prop, color="#ffffff"
-)
+mpl.rcParams['figure.dpi'] = 800
 
-
-st.pyplot(fig,values)
+st.pyplot(fig)
