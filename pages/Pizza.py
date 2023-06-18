@@ -21,7 +21,7 @@ font_bold = FontManager(("https://github.com/google/fonts/blob/main/apache/robot
                          "Roboto-Medium.ttf?raw=true"))
 
 #READ DATA
-df = pd.read_csv('/Users/galfishman/Desktop/new.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 
 st.dataframe(df)
