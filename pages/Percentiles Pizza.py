@@ -23,7 +23,7 @@ font_bold = FontManager(("https://github.com/google/fonts/blob/main/apache/robot
 st.title("MTA Percentiles Compression")
 
 # READ DATA
-rawdf = pd.read_csv('/Users/galfishman/Desktop/MTA STREAMLIT/DataBase.csv')
+rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 st.sidebar.header("Please Filter Here:")
 min_selection = st.sidebar.slider('Minutes played:',
