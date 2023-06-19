@@ -8,11 +8,29 @@ import matplotlib as mpl
 
 st.title("MTA Radar Compression")
 # READ DATA
-df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+
+
+st.sidebar.header("Please Filter Here:")
+
+min_selection = st.sidebar.slider('Minutes played:',
+                                  min_value=rawdf['Minutes played'].min(),
+                                  max_value=rawdf['Minutes played'].max(),
+                                  value=(rawdf['Minutes played'].min(), rawdf['Minutes played'].max()))
+df = rawdf[(rawdf['Minutes played'] >= min_selection[0]) & (rawdf['Minutes played'] <= min_selection[1])]
+
+# Filter by league
+all_leagues = df["League"].unique()
+all_leagues = ['All'] + all_leagues.tolist()
+selected_leagues = st.multiselect("Select League:", options=all_leagues, default=["All"])
+
+if "All" in selected_leagues:
+    df = df  # No filtering needed if "All" is selected
+else:
+    df = df[df["League"].isin(selected_leagues)]
 
 st.dataframe(df)
 
-st.sidebar.header("Please Filter Here:")
 
 Name = st.sidebar.selectbox(
     "Select the Player:",
@@ -48,11 +66,11 @@ for x in params:
 
     ranges.append((a, b))
 
-for x in range(len(df['Player'])):
-    if df['Player'][x] == Name:
-        a_values = df.loc[df['Player'] == Name, params].values.tolist()[0][:]
-    if df['Player'][x] == Name2:
-        b_values = df.loc[df['Player'] == Name2, params].values.tolist()[0][:]
+for _, row in df.iterrows():
+    if row['Player'] == Name:
+        a_values = row[params].tolist()
+    if row['Player'] == Name2:
+        b_values = row[params].tolist()
 
 a_values = a_values[:]
 b_values = b_values[:]
@@ -76,21 +94,26 @@ Position_name = "Position"
 Position_name1 = df.loc[df['Player'] == Name, Position_name].values[0]
 Position_name2 = df.loc[df['Player'] == Name2, Position_name].values[0]
 
+Team_name = "Team"
+team_name1 = df.loc[df['Player'] == Name, Team_name].values[0]
+team_name2 = df.loc[df['Player'] == Name2, Team_name].values[0]
+
+
 
 # Update the title dictionary with minutes played
 title = dict(
-    title_name=f"{Name}\n{'Position: ' + Position_name1}\n{'League: '+league_player1}\n{minutes_player1} Minutes Played",
+    title_name=f"{Name}\n{'Position: ' + Position_name1}\n{'Team:  ' +team_name1}\n{'League: '+league_player1}\n{minutes_player1} Minutes Played",
     title_color='yellow',
-    title_name_2=f"{Name2}\n{'Position: ' + Position_name2}\n{'League: '+league_player2}\n{minutes_player2} Minutes Played",
+    title_name_2=f"{Name2}\n{'Position: ' + Position_name2}\n{'Team:  ' +team_name2}\n{'League: '+league_player2}\n{minutes_player2} Minutes Played",
     title_color_2='blue',
-    title_fontsize=18,
+    title_fontsize=13,
 )
 # RADAR PLOT
 radar = Radar(
     background_color="#121212",
     patch_color="#28252C",
     label_color="#FFFFFF",
-    label_fontsize=6.3,
+    label_fontsize=9,
     range_color="#FFFFFF"
 )
 
@@ -108,6 +131,6 @@ fig, ax = radar.plot_radar(
     compare=True
 )
 
-mpl.rcParams['figure.dpi'] = 800
+mpl.rcParams['figure.dpi'] = 2500
 
 st.pyplot(fig)
