@@ -21,12 +21,28 @@ font_bold = FontManager(("https://github.com/google/fonts/blob/main/apache/robot
                          "Roboto-Medium.ttf?raw=true"))
 
 #READ DATA
-df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
+
+st.sidebar.header("Please Filter Here:")
+min_selection = st.sidebar.slider('Minutes played:',
+                                  min_value=int(rawdf['Minutes played'].min()),
+                                  max_value=int(rawdf['Minutes played'].max()),
+                                  value=(int(rawdf['Minutes played'].min()), int(rawdf['Minutes played'].max())))
+df = rawdf[(rawdf['Minutes played'] >= min_selection[0]) & (rawdf['Minutes played'] <= min_selection[1])]
+
+# Filter by league
+all_leagues = df["League"].unique()
+all_leagues = ['All'] + all_leagues.tolist()
+selected_leagues = st.multiselect("Select League:", options=all_leagues, default=["All"])
+
+if "All" in selected_leagues:
+    df = df  # No filtering needed if "All" is selected
+else:
+    df = df[df["League"].isin(selected_leagues)]
 
 st.dataframe(df)
 
-st.sidebar.header("Please Filter Here:")
 
 Name = st.sidebar.selectbox(
     "Select the Player:",
@@ -66,11 +82,10 @@ for param in params:
     
 selected_columns = ['Player'] + selected_params
 
-    
-for x in range(len(df['Player'])):
-    if df['Player'][x] == Name:
-        values = df.loc[df['Player'] == Name, selected_columns].values.tolist()[0][1:]
 
+for _, row in df.iterrows():
+    if row['Player'] == Name:
+        values = row[selected_columns].tolist()[1:]
 
 
 #ALL PIZZA MAKING
