@@ -11,7 +11,7 @@ st.title("MTA Radar Compression")
 rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 
-st.sidebar.header("Please Filter Here:")
+st.sidebar.header("Filter Here:")
 
 min_selection = st.sidebar.slider('Minutes played:',
                                   min_value=int(rawdf['Minutes played'].min()),
