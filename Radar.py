@@ -16,10 +16,10 @@ rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main
 
 st.sidebar.header("Please Filter Here:")
 
-min_selection = st.sidebar.slider("Minutes played:",
-                                  min_value=rawdf['Minutes played'].min(),
-                                  max_value=rawdf['Minutes played'].max(),
-                                  value=(rawdf['Minutes played'].min(), rawdf['Minutes played'].max()))
+min_selection = st.sidebar.slider('Minutes played:',
+                                  min_value=int(rawdf['Minutes played'].min()),
+                                  max_value=int(rawdf['Minutes played'].max()),
+                                  value=(int(rawdf['Minutes played'].min()), int(rawdf['Minutes played'].max())))
 filtered_df = rawdf[(rawdf['Minutes played'] >= min_selection[0]) & (rawdf['Minutes played'] <= min_selection[1])]
 
 
