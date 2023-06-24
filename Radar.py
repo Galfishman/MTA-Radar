@@ -11,7 +11,8 @@ from pathlib import Path
 
 st.title("MTA Radar Compression")
 # READ DATA
-rawdf = pd.read_csv('/Users/galfishman/Desktop/MTA STREAMLIT/DataBase.csv')
+rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+
 
 st.sidebar.header("Please Filter Here:")
 
