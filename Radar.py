@@ -6,7 +6,6 @@ from mplsoccer import PyPizza
 import matplotlib as mpl
 import pickle
 from pathlib import Path
-import streamlit_authenticator as stauth
 
 ###login
 
