@@ -25,7 +25,7 @@ font_bold = FontManager(("https://github.com/google/fonts/blob/main/apache/robot
 st.title("MTA Percentiles Compression")
 
 # READ DATA
-rawdf = pd.read_csv('/Users/galfishman/Desktop/MTA STREAMLIT/DataBase.csv')
+rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 # Create or retrieve session state
 if 'state' not in st.session_state:
