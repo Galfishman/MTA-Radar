@@ -38,7 +38,7 @@ st.sidebar.header("Please Filter Here:")
 
 
 min_selection = st.sidebar.slider('Minutes played:',
-                                  min_value=0
+                                  min_value=int(rawdf['Minutes played'].min()),
                                   max_value=int(rawdf['Minutes played'].max()),
                                   value=(int(rawdf['Minutes played'].min()), int(rawdf['Minutes played'].max())))
 filtered_df = rawdf[(rawdf['Minutes played'] >= min_selection[0]) & (rawdf['Minutes played'] <= min_selection[1])]
