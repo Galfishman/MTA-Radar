@@ -1,17 +1,18 @@
 import streamlit as st
-
-st.title ("MTA Pizza Compression") 
-
 import pandas as pd
 import matplotlib.pyplot as plt
 from soccerplots.radar_chart import Radar
 from highlight_text import fig_text
-
 from mplsoccer import PyPizza, FontManager
-
 import matplotlib as mpl
 mpl.rcParams['figure.dpi'] = 800
 
+#read data
+@st.cache  # Cache the result of this function
+def load_data():
+    return pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+
+rawdf = load_data()
 #FONT LOAD
 font_normal = FontManager(("https://github.com/google/fonts/blob/main/apache/roboto/static/"
                            "Roboto-Regular.ttf?raw=true"))
@@ -21,7 +22,10 @@ font_bold = FontManager(("https://github.com/google/fonts/blob/main/apache/robot
                          "Roboto-Medium.ttf?raw=true"))
 
 #READ DATA
-rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+#rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+
+
+st.title ("MTA Pizza Compression") 
 
 
 st.sidebar.header("Please Filter Here:")
