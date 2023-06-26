@@ -84,7 +84,7 @@ all_params = list(df.columns[7:])
 selected_params = st.sidebar.multiselect(
     "Select Parameters:",
     options=all_params,
-    default=["Key passes per 90", "Dribbles per 90", "Passes to penalty area per 90", "Shot assists per 90", "Crosses per 90", "Shots per 90", "xG per 90"]
+    default=["Key passes per 90", "Dribbles per 90", "Passes to penalty area per 90", "Shot assists per 90", "Crosses per 90", "Shots per 90", "xG per 90","xA per 90"]
 )
 
 # Update the metrics to match the selected parameters
