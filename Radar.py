@@ -10,7 +10,7 @@ from pathlib import Path
 ###login
 
 # READ DATA
-@st.cache  # Cache the result of this function
+@st.cache_data  # Cache the result of this function
 def load_data():
     return pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
