@@ -10,8 +10,15 @@ import matplotlib.image as mpimg
 from io import BytesIO
 from mplsoccer import PyPizza, FontManager
 import matplotlib as mpl
-
 mpl.rcParams['figure.dpi'] = 800
+
+
+#Read Data 
+@st.cache  # Cache the result of this function
+def load_data():
+    return pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+
+rawdf = load_data()
 
 # FONT LOAD
 font_normal = FontManager(("https://github.com/google/fonts/blob/main/apache/roboto/static/"
@@ -25,7 +32,7 @@ font_bold = FontManager(("https://github.com/google/fonts/blob/main/apache/robot
 st.title("MTA Percentiles Compression")
 
 # READ DATA
-rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+#rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 # Create or retrieve session state
 if 'state' not in st.session_state:
