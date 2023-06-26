@@ -37,11 +37,10 @@ form1 = st.sidebar.form(key="Options")
 
 
 
-
-min_selection = st.sidebar.slider('Minutes played:',
-                                  min_value=int(rawdf['Minutes played'].min()),
-                                  max_value=int(rawdf['Minutes played'].max()),
-                                  value=(int(rawdf['Minutes played'].min()), int(rawdf['Minutes played'].max())))
+min_selection = form1.slider('Minutes played:',
+                                  min_value=rawdf['Minutes played'].min(),
+                                  max_value=rawdf['Minutes played'].max(),
+                                  value=(rawdf['Minutes played'].min(), rawdf['Minutes played'].max()))
 filtered_df = rawdf[(rawdf['Minutes played'] >= min_selection[0]) & (rawdf['Minutes played'] <= min_selection[1])]
 
 
@@ -103,34 +102,33 @@ metrics = selected_params
 form1.form_submit_button("Apply Changes")
 
 # Check if changes should be applied
-if st.session_state.state['apply_changes']:
     # Apply filters and update the dataframe
-    filtered_df = rawdf[(rawdf['League'] == selected_leagues)]
+filtered_df = rawdf[(rawdf['League'] == selected_leagues)]
 
     # Calculate the number of subplots needed based on the selected parameters
-    num_subplots = len(metrics)
+num_subplots = len(metrics)
 
     # Calculate the number of rows and columns for subplots
-    num_rows = math.ceil(num_subplots / 2)
-    num_cols = 2
+num_rows = math.ceil(num_subplots / 2)
+num_cols = 2
 
     # Calculate the figure size based on the number of subplots
-    fig_width = 15
-    fig_height = 5 + 2.5 * num_rows  # Adjust the value (5) to increase/decrease the height
+fig_width = 15
+fig_height = 5 + 2.5 * num_rows  # Adjust the value (5) to increase/decrease the height
 
     # Adjust the number of subplots in the figure with the updated size
-    fig, axes = plt.subplots(num_rows, num_cols, figsize=(fig_width, fig_height))
+fig, axes = plt.subplots(num_rows, num_cols, figsize=(fig_width, fig_height))
 
-    background = '#313332'
-    text_color ='white'
+background = '#313332'
+text_color ='white'
 
-    fig.set_facecolor(background)
+fig.set_facecolor(background)
 
-    mpl.rcParams['xtick.color'] = text_color
-    mpl.rcParams['ytick.color'] = text_color
+mpl.rcParams['xtick.color'] = text_color
+mpl.rcParams['ytick.color'] = text_color
 
     # Create initial for loop
-    for i, metric in enumerate(metrics):
+for i, metric in enumerate(metrics):
         ax = axes[i // 2, i % 2]
         ax.set_facecolor(background)
 
@@ -149,11 +147,11 @@ if st.session_state.state['apply_changes']:
     # Add common x-label to the bottom subplot
 
     # Remove any excess subplots
-    for j in range(num_subplots, len(metrics)):
+for j in range(num_subplots, len(metrics)):
         fig.delaxes(axes[j // 2, j % 2])
 
     # Update the title dictionary with minutes played
-    title = dict(
+title = dict(
         title_name= "●  -  " + Name,
         title_color='yellow',
         title_name_2= "●  -  " + Name2,
@@ -161,13 +159,14 @@ if st.session_state.state['apply_changes']:
         title_fontsize=16,
     )
     # Calculate the position for the title
-    title_x = fig.subplotpars.left + 0.45
-    title_y = fig.subplotpars.top + 0.03
-    title_x_2 = fig.subplotpars.left + 0.3
-    title_y_2 = fig.subplotpars.top + 0.03
+title_x = fig.subplotpars.left + 0.45
+title_y = fig.subplotpars.top + 0.03
+title_x_2 = fig.subplotpars.left + 0.3
+title_y_2 = fig.subplotpars.top + 0.03
 
     # Add title text
-    fig.text(title_x, title_y, title['title_name'], fontsize=title['title_fontsize'], color=title['title_color'], ha='center')
-    fig.text(title_x_2, title_y, title['title_name_2'], fontsize=title['title_fontsize'], color=title['title_color_2'], ha='center')
+fig.text(title_x, title_y, title['title_name'], fontsize=title['title_fontsize'], color=title['title_color'], ha='center')
+fig.text(title_x_2, title_y, title['title_name_2'], fontsize=title['title_fontsize'], color=title['title_color_2'], ha='center')
 
-    st.pyplot(fig)
+st.pyplot(fig)
+
