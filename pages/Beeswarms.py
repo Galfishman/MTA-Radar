@@ -126,9 +126,9 @@ for i, metric in enumerate(metrics):
         if x in spines:
             ax.spines[x].set_visible(False)
 
-    sns.swarmplot(x=metric, data=df, ax=ax, zorder=1, alpha=0.7,)
-    ax.scatter(x=df[df['Player'] == Name][metric], y=[0] * len(df[df['Player'] == Name]), s=70, c='yellow', zorder=2, edgecolors='black', alpha=0.9)
-    ax.scatter(x=df[df['Player'] == Name2][metric], y=[0] * len(df[df['Player'] == Name2]), s=70   , c='white', zorder=2, edgecolors='black', alpha=0.9)
+    sns.stripplot(x=metric, data=df, ax=ax, alpha=0.7, jitter=0.2)
+    ax.scatter(x=df[df['Player'] == Name][metric], y=[0] * len(df[df['Player'] == Name]), s=50, c='yellow', zorder=2, edgecolors='black', alpha=0.9)
+    ax.scatter(x=df[df['Player'] == Name2][metric], y=[0] * len(df[df['Player'] == Name2]), s=50, c='white', zorder=2, edgecolors='black', alpha=0.9)
     ax.set_title(metric, color='yellow' if metric == Name else 'white', loc='center', size=13, y=0.89)
     ax.set_xlabel('', c=text_color)  # Clear the default x-label
     ax.set_xticklabels([])  # Remove x-tick labels
