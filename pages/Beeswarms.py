@@ -18,7 +18,7 @@ st.title("MTA BeeSwarm Compression")
 # READ DATA
 @st.cache_data  # Cache the result of this function
 def load_data():
-    return pd.read_csv('/Users/galfishman/Desktop/MTA STREAMLIT/DataBase.csv')
+    return pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 rawdf = load_data()
 
