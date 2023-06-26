@@ -12,10 +12,18 @@ import pickle
 from pathlib import Path
 
 ###login
+# READ DATA
+@st.cache  # Cache the result of this function
+def load_data():
+    return pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+
+rawdf = load_data()
+
+
 
 st.title("MTA BeeSwarm Compression")
 # READ DATA
-rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+#rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 # Create or retrieve session state
 if 'state' not in st.session_state:
