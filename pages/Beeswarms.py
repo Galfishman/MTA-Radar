@@ -15,7 +15,7 @@ from pathlib import Path
 
 st.title("MTA BeeSwarm Compression")
 # READ DATA
-rawdf = pd.read_csv('/Users/galfishman/Desktop/MTA STREAMLIT/DataBase.csv')
+rawdf = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
 
 # Create or retrieve session state
 if 'state' not in st.session_state:
