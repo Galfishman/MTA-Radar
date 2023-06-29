@@ -115,6 +115,7 @@ selected_params = st.sidebar.multiselect(
 params = selected_params
 player_league = player_data = df.loc[df['Player'] == Name, "League"].iloc[0]
 player_data = df.loc[df['Player'] == Name, selected_params].iloc[0]
+player_data = player_data.dropna()
 values = [math.floor(stats.percentileofscore(df[param], player_data[param])) for param in selected_params]
 
 # Create a table to display the statistic names and values
