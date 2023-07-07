@@ -85,11 +85,11 @@ for combination in combinations(player_data.keys(), num_players):
 combinations_with_scores.sort(key=lambda x: x[1], reverse=True)
 
 # Display the selected number of combinations
+# Display the selected number of combinations
 st.header("Top Combinations")
 for i, (combination, total_score) in enumerate(combinations_with_scores[:num_combinations]):
-    st.subheader(f"{selected_parameter} - Combination {i+1}")
-    st.write("Players:", '  +  '.join([f"{player} ({player_data[player]})" for player in combination]))
-    formatted_score = "{:.3f}"
-    st.write("Total Score:", formatted_score)
-    st.write("---") 
+    st.subheader(f"Parameter: {selected_parameter} - Combination {i+1}")
+    st.write("Players:", ', '.join([f"{player} ({player_data[player]})" for player in combination]))
+    st.write("Total Score:", total_score)
+    st.write("---")
 
