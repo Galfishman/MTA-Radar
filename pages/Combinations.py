@@ -39,7 +39,7 @@ min_selection = st.sidebar.slider('Minutes played:',
                                   min_value=int(df['Minutes played'].min()),
                                   max_value=int(df['Minutes played'].max()),
                                   value=(int(df['Minutes played'].min()), int(df['Minutes played'].max())))
-filtered_data = df[(df['Minutes played'] >= min_selection[0]) & (df['Minutes played'] <= min_selection[1])]
+df = df[(df['Minutes played'] >= min_selection[0]) & (df['Minutes played'] <= min_selection[1])]
 
 # Select parameter
 selected_parameter = st.selectbox("Select Parameter", parameter_options)
