@@ -6,6 +6,7 @@ import matplotlib as plt
 # Read player data from the CSV file
 df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Combinations.csv')
 
+df.fillna(0, inplace=True)
 
 # Get unique teams from the 'Team' column
 team_options = df['Team'].unique().tolist()
