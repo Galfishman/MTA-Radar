@@ -6,6 +6,7 @@ import matplotlib as plt
 # Read player data from the CSV file
 df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Combinations.csv')
 
+
 # Get unique teams from the 'Team' column
 team_options = df['Team'].unique().tolist()
 
@@ -20,8 +21,6 @@ position_options = {
 
 # Get unique parameters from the DataFrame (excluding the first 7 columns)
 parameter_options = df.columns[7:].tolist()
-df.fillna(0, inplace=True)
-
 
 # Streamlit application
 st.title("Player Combination Analyzer")
@@ -36,9 +35,9 @@ selected_team = st.sidebar.selectbox("Select Team", team_options)
 selected_position = st.sidebar.selectbox("Select Position", list(position_options.keys()))
 
 min_selection = st.sidebar.slider('Minutes played:',
-                                  min_value=1,
+                                  min_value=int(df['Minutes played'].min()),
                                   max_value=int(df['Minutes played'].max()),
-                                  value=(int(df['Minutes played'].min()), int(df['Minutes played'].max())))
+                                  value=(int(df['Minutes played'].min()), int(df['Minutes played'].max()))).astype(int)
 df = df[(df['Minutes played'] >= min_selection[0]) & (df['Minutes played'] <= min_selection[1])]
 
 # Select parameter
@@ -49,17 +48,15 @@ threshold_score = st.number_input("Enter Parameter Score", min_value=0.0, step=0
 
 # Select number of players in combinations
 num_players = st.number_input("Select Number of Players in Combinations", min_value=1, max_value=6, value=3)
-# Select number of combinations to display
 
+# Select number of combinations to display
 num_combinations = st.number_input("Enter Number of Combinations", min_value=1)
 
 # Select players to exclude
+players_to_exclude = st.sidebar.multiselect("Select Players to Exclude", df['Player'].tolist())
 
 # Filter data based on selected team and position
 filtered_data = df[df['Team'] == selected_team]
-
-players_to_exclude = st.sidebar.multiselect("Select Players to Exclude", filtered_data['Player'].tolist())
-
 
 if selected_position != "All":
     position_filter = filtered_data["Position"].str.contains("|".join(position_options[selected_position]), case=False)
