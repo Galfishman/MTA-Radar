@@ -20,6 +20,8 @@ position_options = {
 
 # Get unique parameters from the DataFrame (excluding the first 7 columns)
 parameter_options = df.columns[7:].tolist()
+df.fillna(0, inplace=True)
+
 
 # Streamlit application
 st.title("Player Combination Analyzer")
