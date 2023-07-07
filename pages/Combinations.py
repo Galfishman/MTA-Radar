@@ -36,7 +36,7 @@ selected_team = st.sidebar.selectbox("Select Team", team_options)
 selected_position = st.sidebar.selectbox("Select Position", list(position_options.keys()))
 
 min_selection = st.sidebar.slider('Minutes played:',
-                                  min_value=1.0,
+                                  min_value=df['Minutes played'].min(),
                                   max_value=float(df['Minutes played'].max()),
                                   value=(1.0, float(df['Minutes played'].max()))).astype(float)
 df = df[(df['Minutes played'] >= min_selection[0]) & (df['Minutes played'] <= min_selection[1])]
