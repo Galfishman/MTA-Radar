@@ -53,11 +53,11 @@ num_players = st.number_input("Select Number of Players in Combinations", min_va
 # Select number of combinations to display
 num_combinations = st.number_input("Enter Number of Combinations", min_value=1)
 
-# Select players to exclude
-players_to_exclude = st.sidebar.multiselect("Select Players to Exclude", df['Player'].tolist())
-
 # Filter data based on selected team and position
 filtered_data = df[df['Team'] == selected_team]
+
+# Select players to exclude
+players_to_exclude = st.sidebar.multiselect("Select Players to Exclude", filtered_data['Player'].tolist())
 
 if selected_position != "All":
     position_filter = filtered_data["Position"].str.contains("|".join(position_options[selected_position]), case=False)
