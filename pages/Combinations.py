@@ -7,9 +7,6 @@ import matplotlib as plt
 df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Combinations.csv')
 
 
-# Read player data from the CSV file
-df = pd.read_csv('/Users/galfishman/Desktop/Combinations.csv')
-
 
 df.fillna(0, inplace=True)
 
