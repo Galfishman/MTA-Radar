@@ -12,7 +12,7 @@ from pathlib import Path
 # READ DATA
 @st.cache_data  # Cache the result of this function
 def load_data():
-    return pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/DataBase.csv')
+    return pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Players%20Export.csv')
 
 rawdf = load_data()
 
