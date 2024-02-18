@@ -9,9 +9,7 @@ import matplotlib as mpl
 st.title("MTA RADAR Comparison")
 
 # READ DATA
-@st.cache_data  # Cache the result of this function
-def load_data():
-    return pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Players%20Export.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Players%20Export.csv')
 
 # Define the mapping of Short Position to Position 1
 position_mapping = {
