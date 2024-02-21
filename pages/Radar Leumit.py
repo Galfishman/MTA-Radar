@@ -39,8 +39,13 @@ selected_position_group = st.sidebar.selectbox(
 )
 
 # Filter by Minutes Played (Min)
-min_minutes_played = st.sidebar.slider("Filter by Minimum Minutes Played:", min_value=0, max_value=int(df['Minutes played'].max()), step=1, value=0)
-
+min_minutes_played = st.sidebar.slider(
+    "Filter by Minimum Minutes Played:",
+    min_value=0,
+    max_value=int(df['Minutes played'].max()),  # Convert max_value to int
+    step=1,
+    value=0
+)
 # Filter the DataFrame based on the selected position group and minimum minutes played
 filtered_players = df[df["Position"].str.contains("|".join(position_mapping[selected_position_group]), case=False) & (df['Minutes played'] >= min_minutes_played)]
 players_list = filtered_players["Player"].unique()
