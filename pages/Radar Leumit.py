@@ -17,7 +17,7 @@ plt.rcParams['font.family'] = 'Arial'  # You can replace 'Arial' with any font a
 
 st.title("MTA RADAR Comparison")
 # READ DATA
-df = pd.read_csv('/Users/galfishman/Desktop/Leumit Players.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/pages/Leumit%20Players.csv')
 Team = "teamName"
 
 
