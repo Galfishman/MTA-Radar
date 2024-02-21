@@ -38,9 +38,11 @@ selected_position_group = st.sidebar.selectbox(
     options=list(position_mapping),
 )
 
+max_value_placeholder = 6000  # Use a large placeholder value
 min_minutes_played = st.sidebar.slider(
     "Filter by Minimum Minutes Played:",
     min_value=0,
+    max_value=max_value_placeholder,
     step=1,
     value=0
 )
