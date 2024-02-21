@@ -41,7 +41,6 @@ selected_position_group = st.sidebar.selectbox(
 min_minutes_played = st.sidebar.slider(
     "Filter by Minimum Minutes Played:",
     min_value=0,
-    max_value=int(df['Minutes played'].astype(int).max()),  # Convert both min and max values to int
     step=1,
     value=0
 )
