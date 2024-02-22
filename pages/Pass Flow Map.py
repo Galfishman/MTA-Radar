@@ -6,9 +6,6 @@ from mplsoccer import Pitch
 from scipy.ndimage import gaussian_filter
 import matplotlib.patheffects as path_effects
 from matplotlib.colorbar import ColorbarBase
-import matplotlib.patheffects as pe
-from matplotlib.ticker import MaxNLocator, FuncFormatter
-
 
 
 
