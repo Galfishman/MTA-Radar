@@ -184,18 +184,23 @@ st.pyplot(fig_xa)
 #####################################################################################################################################################################
 
 
+df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved"))]
+df_shots['Date'] = pd.to_datetime(df_shots['Date'], errors='coerce')
+df_shots = df_shots[df_shots['Date'].isin(recent_dates)]
 # Filter for "Goal" and "PenaltyGoal"
-# Filter for the desired play types and date range
-df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved")) & (df['Date'].isin(recent_dates))]
-
-# Filter for "Goal" and "PenaltyGoal"
-df_goals = df_shots[(df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal")]
+df_goals = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "PenaltyGoal"))]
 
 # Filter for "Shot Saved" and "Post"
-df_ontarget = df_shots[(df_shots['playType'] == "Shot Saved") | (df_shots['playType'] == "Post")]
+df_ontarget = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Shot Saved") | (df['playType'] == "Post"))]
 
 # Filter for "Miss"
-df_miss = df_shots[df_shots['playType'] == "Miss"]
+df_miss = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Miss")]
+
+
+df_goals = df_shots[df_shots['Date'].isin(recent_dates)]
+df_ontarget = df_shots[df_shots['Date'].isin(recent_dates)]
+df_miss = df_shots[df_shots['Date'].isin(recent_dates)]
+
 
 pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       pitch_type='opta',
