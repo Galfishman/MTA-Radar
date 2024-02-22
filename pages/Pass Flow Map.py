@@ -207,7 +207,7 @@ pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
 shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
 sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
                          s=(df_goals.xG * 900) + 100,
-                         c='#b94b75',
+                         c='white',
                          edgecolors='#383838',
                          marker='*',  # You can choose a different marker for goals
                          label='Goals',
@@ -232,8 +232,8 @@ sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
                         ax=shot_ax,
                         alpha = 0.3)
 
-txt = ax.text(x=40, y=80, s='Barcelona shots\nversus Sevilla',
-              size=30,
+txt = ax.text(x=80, y=80, s='Barcelona shots\nversus Sevilla',
+              size=50,
               # here i am using a downloaded font from google fonts instead of passing a fontdict
               va='center', ha='center')
 st.pyplot(shot_fig)
