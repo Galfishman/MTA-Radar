@@ -22,15 +22,16 @@ TeamPick = st.sidebar.selectbox('Select Team', df['teamFullName'].unique())
 
 # Filter data for the selected team and play type
 df_pass = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Pass") & (df['PassResult'] != 'Incomplete')]
-
+# Convert 'Date' column to datetime format using .loc
 df_pass.loc[:, 'Date'] = pd.to_datetime(df_pass['Date'], errors='coerce')
 
 # Number of recent dates slider in Streamlit
 num_recent_dates = st.sidebar.slider('Number of Recent Dates', 1, df_pass['Date'].nunique(), 3)
 
-# Filter data based on the selected number of recent dates
+# Filter data based on the selected number of recent dates using .loc
 recent_dates = df_pass['Date'].unique()[-num_recent_dates:]
-df_pass = df_pass[df_pass['Date'].isin(recent_dates)]
+df_pass = df_pass.loc[df_pass['Date'].isin(recent_dates)]
+
 
 
  #####################################################################################################################################################################
