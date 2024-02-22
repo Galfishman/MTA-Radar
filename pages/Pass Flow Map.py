@@ -218,7 +218,7 @@ sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
 sc_ontarget = pitch.scatter(df_ontarget.EventX, df_ontarget.EventY,
                             s=(df_ontarget.xG * 900) + 100,
                             c='blue',
-                            edgecolors='#383838',
+                            edgecolors='white',
                             marker='o',  # You can choose a different marker for on-target shots
                             label='On Target',
                             alpha = 0.8,
@@ -233,5 +233,8 @@ sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
                         label='Misses',
                         ax=shot_ax,
                         alpha = 0.3)
+
+title_text = 'Shots'  # Customize the title as needed
+txt = shot_ax.text(0.5, 1.03, title_text, transform=shot_ax.transAxes, fontsize=12, ha='center')
 
 st.pyplot(shot_fig)
