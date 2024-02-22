@@ -185,6 +185,9 @@ st.pyplot(fig_xa)
 
 
 df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved"))]
+df_shots['Date'] = pd.to_datetime(df_shots['Date'], errors='coerce')
+df_shots = df_shots[df_shots['Date'].isin(recent_dates)]
+
 
 pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       pitch_type='opta',
