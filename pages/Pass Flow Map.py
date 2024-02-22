@@ -189,8 +189,7 @@ df_shots = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Goal")& (df
 pitch = VerticalPitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       half=True,  # half of a pitch
                       goal_type='box',
-                      goal_alpha=0.8,
-                      vertical = True)  # control the goal transparency
+                      goal_alpha=0.8)  # control the goal transparency
 shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
 sc = pitch.scatter(df_shots.EventX, df_shots.EventY,
                    # size varies between 100 and 1000 (points squared)
