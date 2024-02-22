@@ -209,7 +209,7 @@ sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
                          s=(df_goals.xG * 900) + 100,
                          c='#b94b75',
                          edgecolors='#383838',
-                         marker='o',  # You can choose a different marker for goals
+                         marker='*',  # You can choose a different marker for goals
                          label='Goals',
                          ax=shot_ax)
 
@@ -218,7 +218,7 @@ sc_ontarget = pitch.scatter(df_ontarget.EventX, df_ontarget.EventY,
                             s=(df_ontarget.xG * 900) + 100,
                             c='#b94b75',
                             edgecolors='#383838',
-                            marker='^',  # You can choose a different marker for on-target shots
+                            marker='o',  # You can choose a different marker for on-target shots
                             label='On Target',
                             ax=shot_ax)
 
@@ -227,9 +227,10 @@ sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
                         s=(df_miss.xG * 900) + 100,
                         c='#b94b75',
                         edgecolors='#383838',
-                        marker='x',
+                        marker='X',
                         label='Misses',
-                        ax=shot_ax)
+                        ax=shot_ax,
+                        alpha = 0.3)
 
 txt = ax.text(x=40, y=80, s='Barcelona shots\nversus Sevilla',
               size=30,
