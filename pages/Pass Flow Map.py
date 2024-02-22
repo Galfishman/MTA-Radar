@@ -197,12 +197,6 @@ df_ontarget = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Shot Sa
 df_miss = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Miss")]
 
 
-df_goals = df_goals[df_goals['Date'].isin(recent_dates)]
-df_goals['Date'] = pd.to_datetime(df_goals['Date'], errors='coerce')
-df_ontarget = df_ontarget[df_ontarget['Date'].isin(recent_dates)]
-df_miss = df_miss[df_miss['Date'].isin(recent_dates)]
-
-
 pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       pitch_type='opta',
                       half=True,  # half of a pitch
