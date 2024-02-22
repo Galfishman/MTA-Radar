@@ -187,12 +187,12 @@ st.pyplot(fig_xa)
 df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved"))]
 
 pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
-                      pitch_type='opta'
+                      pitch_type='opta',
                       half=True,  # half of a pitch
                       goal_type='box',
                       goal_alpha=0.8)  # control the goal transparency
 shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
-sc = pitch.scatter(df_shots.EventY, df_shots.EventX,
+sc = pitch.scatter(df_shots.EventX, df_shots.EventY,
                    # size varies between 100 and 1000 (points squared)
                    s=(df_shots.xG * 900) + 100,
                    c='#b94b75',  # color for scatter in hex format
