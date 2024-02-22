@@ -197,7 +197,7 @@ df_ontarget = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['play
 df_miss = df_shots[(df_shots['teamFullName'] == TeamPick) & (df_shots['playType'] == "Miss")]
 
 
-pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
+pitch = VerticalPitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       pitch_type='opta',
                       half=True,  # half of a pitch
                       goal_type='box',
@@ -235,6 +235,6 @@ sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
                         alpha = 0.3)
 
 title_text = 'Shots'  # Customize the title as needed
-txt = shot_ax.text(0.5, 1.03, title_text, transform=shot_ax.transAxes, fontsize=12, ha='center')
+txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=12, ha='center')
 
 st.pyplot(shot_fig)
