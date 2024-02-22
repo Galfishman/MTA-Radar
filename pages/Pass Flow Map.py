@@ -198,6 +198,7 @@ df_miss = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Miss")]
 
 
 df_goals = df_goals[df_goals['Date'].isin(recent_dates)]
+df_goals['Date'] = pd.to_datetime(df_goals['Date'], errors='coerce')
 df_ontarget = df_ontarget[df_ontarget['Date'].isin(recent_dates)]
 df_miss = df_miss[df_miss['Date'].isin(recent_dates)]
 
@@ -209,7 +210,7 @@ pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       goal_alpha=0.8)  # control the goal transparency
 
 
-shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
+shot_fig, shot_ax = pitch.draw(figsize=(10, 8))
 sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
                          s=(df_goals.xG * 900) + 100,
                          c='white',
@@ -237,8 +238,4 @@ sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
                         ax=shot_ax,
                         alpha = 0.3)
 
-txt = ax.text(x=80, y=80, s='Barcelona shots\nversus Sevilla',
-              size=50,
-              # here i am using a downloaded font from google fonts instead of passing a fontdict
-              va='center', ha='center')
 st.pyplot(shot_fig)
