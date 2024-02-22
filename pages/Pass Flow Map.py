@@ -210,7 +210,7 @@ sc = pitch.scatter(df_shots.EventX, df_shots.EventY,
                    c='#b94b75',  # color for scatter in hex format
                    edgecolors='#383838',  # give the markers a charcoal border
                    # for other markers types see: https://matplotlib.org/api/markers_api.html
-                   marker=play_type_markers,
+                   marker='x',
                    ax=shot_ax)
 txt = ax.text(x=40, y=80, s='Barcelona shots\nversus Sevilla',
               size=30,
