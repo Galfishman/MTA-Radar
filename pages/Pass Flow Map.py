@@ -6,13 +6,12 @@ from mplsoccer import Pitch
 from scipy.ndimage import gaussian_filter
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patheffects as path_effects
-from mplsoccer import VerticalPitch, FontManager, Sbopen
 from matplotlib.colors import ListedColormap
 from matplotlib.colorbar import ColorbarBase
 import matplotlib.colors as mcolors
 import matplotlib.patheffects as pe
-from mplsoccer import Sbopen, Pitch
 from matplotlib.ticker import MaxNLocator, FuncFormatter
+
 
 
 
@@ -20,7 +19,7 @@ from matplotlib.ticker import MaxNLocator, FuncFormatter
 rcParams['text.color'] = '#c7d5cc'  # set the default text color
 
 # Load data
-df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/pages/export.csv')
+df = pd.read_csv('/Users/galfishman/Desktop/export.csv', low_memory=False)
 
 # Streamlit app
 st.title('Passing details plots')
