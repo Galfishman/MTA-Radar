@@ -188,7 +188,7 @@ df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (
 df_shots['Date'] = pd.to_datetime(df_shots['Date'], errors='coerce')
 df_shots = df_shots[df_shots['Date'].isin(recent_dates)]
 # Filter for "Goal" and "PenaltyGoal"
-df_goals = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "PenaltyGoal"))]
+df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
 
 # Filter for "Shot Saved" and "Post"
 df_ontarget = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Shot Saved") | (df['playType'] == "Post"))]
@@ -211,7 +211,8 @@ sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
                          edgecolors='#383838',
                          marker='*',  # You can choose a different marker for goals
                          label='Goals',
-                         ax=shot_ax)
+                         ax=shot_ax,
+                         zorder = 2)
 
 # Scatter plot for "Shot Saved" and "Post"
 sc_ontarget = pitch.scatter(df_ontarget.EventX, df_ontarget.EventY,
