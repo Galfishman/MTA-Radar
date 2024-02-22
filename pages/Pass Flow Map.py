@@ -11,7 +11,7 @@ from matplotlib.colorbar import ColorbarBase
 rcParams['text.color'] = '#c7d5cc'  # set the default text color
 
 # Load data
-df = pd.read_csv('/Users/galfishman/Desktop/export.csv', low_memory=False)
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/pages/export.csv')
 
 # Streamlit app
 st.title('Passing details plots')
