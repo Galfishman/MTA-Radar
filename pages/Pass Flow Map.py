@@ -23,8 +23,7 @@ TeamPick = st.sidebar.selectbox('Select Team', df['teamFullName'].unique())
 # Filter data for the selected team and play type
 df_pass = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Pass") & (df['PassResult'] != 'Incomplete')]
 
-# Convert 'Date' column to datetime format
-df_pass['Date'] = pd.to_datetime(df_pass['Date'], errors='coerce')
+df_pass.loc[:, 'Date'] = pd.to_datetime(df_pass['Date'], errors='coerce')
 
 # Number of recent dates slider in Streamlit
 num_recent_dates = st.sidebar.slider('Number of Recent Dates', 1, df_pass['Date'].nunique(), 3)
@@ -185,7 +184,7 @@ st.pyplot(fig_xa)
 
 
 df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved"))]
-df_shots['Date'] = pd.to_datetime(df_shots['Date'], errors='coerce')
+df_shots.loc[:, 'Date'] = pd.to_datetime(df_shots['Date'], errors='coerce')
 df_shots = df_shots[df_shots['Date'].isin(recent_dates)]
 # Filter for "Goal" and "PenaltyGoal"
 df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
