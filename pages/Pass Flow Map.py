@@ -191,10 +191,10 @@ df_shots = df_shots[df_shots['Date'].isin(recent_dates)]
 df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
 
 # Filter for "Shot Saved" and "Post"
-df_ontarget = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Shot Saved") | (df['playType'] == "Post"))]
+df_ontarget = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Shot Saved") | (df_shots['playType'] == "Post"))]
 
 # Filter for "Miss"
-df_miss = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Miss")]
+df_miss = df_shots[(df_shots['teamFullName'] == TeamPick) & (df_shots['playType'] == "Miss")]
 
 
 pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
@@ -217,10 +217,11 @@ sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
 # Scatter plot for "Shot Saved" and "Post"
 sc_ontarget = pitch.scatter(df_ontarget.EventX, df_ontarget.EventY,
                             s=(df_ontarget.xG * 900) + 100,
-                            c='#b94b75',
+                            c='blue',
                             edgecolors='#383838',
                             marker='o',  # You can choose a different marker for on-target shots
                             label='On Target',
+                            alpha = 0.8,
                             ax=shot_ax)
 
 # Scatter plot for "Miss"
