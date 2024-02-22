@@ -6,12 +6,12 @@ from mplsoccer import Pitch
 from scipy.ndimage import gaussian_filter
 from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patheffects as path_effects
-from mplsoccer import VerticalPitch, FontManager, Sbopen
+from mplsoccer import VerticalPitch, FontManager
 from matplotlib.colors import ListedColormap
 from matplotlib.colorbar import ColorbarBase
 import matplotlib.colors as mcolors
 import matplotlib.patheffects as pe
-from mplsoccer import Sbopen, Pitch
+from mplsoccer import Pitch
 from matplotlib.ticker import MaxNLocator, FuncFormatter
 
 
