@@ -179,3 +179,27 @@ title_font = {'fontname': 'Arial', 'color': 'white', 'fontsize': 20}
 ax_xa.set_title(f'{TeamPick} xA Heat Map', **title_font)
 
 st.pyplot(fig_xa)
+
+#####################################################################################################################################################################
+
+
+df_shots = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Goal")& (df['playType'] == "Miss")& (df['playType'] == "PenaltyGoal")& (df['playType'] == "Post") & (df['playType'] == "Shot Saved")]
+
+pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
+                      half=True,  # half of a pitch
+                      goal_type='box',
+                      goal_alpha=0.8)  # control the goal transparency
+shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
+sc = pitch.scatter(df_shots.EventX, df_shots.EvenY,
+                   # size varies between 100 and 1000 (points squared)
+                   s=(df_shots.xG * 900) + 100,
+                   c='#b94b75',  # color for scatter in hex format
+                   edgecolors='#383838',  # give the markers a charcoal border
+                   # for other markers types see: https://matplotlib.org/api/markers_api.html
+                   marker='h',
+                   ax=shot_ax)
+txt = ax.text(x=40, y=80, s='Barcelona shots\nversus Sevilla',
+              size=30,
+              # here i am using a downloaded font from google fonts instead of passing a fontdict
+              va='center', ha='center')
+st.pyplot(shot_fig)
