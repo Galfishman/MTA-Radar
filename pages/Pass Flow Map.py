@@ -184,7 +184,7 @@ st.pyplot(fig_xa)
 #####################################################################################################################################################################
 
 
-df_shots = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Goal")& (df['playType'] == "Miss")& (df['playType'] == "PenaltyGoal")& (df['playType'] == "Post") & (df['playType'] == "Shot Saved")]
+df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved"))]
 
 pitch = VerticalPitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       half=True,  # half of a pitch
