@@ -6,6 +6,7 @@ from mplsoccer import Pitch
 from scipy.ndimage import gaussian_filter
 import matplotlib.patheffects as path_effects
 from matplotlib.colorbar import ColorbarBase
+from mplsoccer import VerticalPitch
 
 # Set matplotlib parameters
 rcParams['text.color'] = '#c7d5cc'  # set the default text color
@@ -185,10 +186,11 @@ st.pyplot(fig_xa)
 
 df_shots = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Goal")& (df['playType'] == "Miss")& (df['playType'] == "PenaltyGoal")& (df['playType'] == "Post") & (df['playType'] == "Shot Saved")]
 
-pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
+pitch = VerticalPitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       half=True,  # half of a pitch
                       goal_type='box',
-                      goal_alpha=0.8)  # control the goal transparency
+                      goal_alpha=0.8,
+                      vertical = True)  # control the goal transparency
 shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
 sc = pitch.scatter(df_shots.EventX, df_shots.EventY,
                    # size varies between 100 and 1000 (points squared)
