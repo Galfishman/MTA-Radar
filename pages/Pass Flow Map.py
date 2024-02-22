@@ -192,7 +192,7 @@ pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
 shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
 sc = pitch.scatter(df_shots.EventX, df_shots.EventY,
                    # size varies between 100 and 1000 (points squared)
-                   s=(df_shots.xG * 900) + 100,
+                   s=(df_shots.X G * 900) + 100,
                    c='#b94b75',  # color for scatter in hex format
                    edgecolors='#383838',  # give the markers a charcoal border
                    # for other markers types see: https://matplotlib.org/api/markers_api.html
