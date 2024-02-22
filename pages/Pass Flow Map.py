@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from mplsoccer import Pitch
 from scipy.ndimage import gaussian_filter
-from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patheffects as path_effects
-from matplotlib.colors import ListedColormap
 from matplotlib.colorbar import ColorbarBase
 import matplotlib.colors as mcolors
 import matplotlib.patheffects as pe
