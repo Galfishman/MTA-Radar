@@ -187,6 +187,14 @@ st.pyplot(fig_xa)
 df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved"))]
 df_shots['Date'] = pd.to_datetime(df_shots['Date'], errors='coerce')
 df_shots = df_shots[df_shots['Date'].isin(recent_dates)]
+# Filter for "Goal" and "PenaltyGoal"
+df_goals = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "PenaltyGoal"))]
+
+# Filter for "Shot Saved" and "Post"
+df_ontarget = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Shot Saved") | (df['playType'] == "Post"))]
+
+# Filter for "Miss"
+df_miss = df[(df['teamFullName'] == TeamPick) & (df['playType'] == "Miss")]
 
 
 pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
@@ -195,23 +203,34 @@ pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       goal_type='box',
                       goal_alpha=0.8)  # control the goal transparency
 
-play_type_markers = {
-    'Goal': 'o',
-    'Miss': 'x',
-    'PenaltyGoal': '^',
-    'Post': 's',
-    'Shot Saved': 'D'
-}
-    
+
 shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
-sc = pitch.scatter(df_shots.EventX, df_shots.EventY,
-                   # size varies between 100 and 1000 (points squared)
-                   s=(df_shots.xG * 900) + 100,
-                   c='#b94b75',  # color for scatter in hex format
-                   edgecolors='#383838',  # give the markers a charcoal border
-                   # for other markers types see: https://matplotlib.org/api/markers_api.html
-                   marker='x',
-                   ax=shot_ax)
+sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
+                         s=(df_goals.xG * 900) + 100,
+                         c='#b94b75',
+                         edgecolors='#383838',
+                         marker='o',  # You can choose a different marker for goals
+                         label='Goals',
+                         ax=shot_ax)
+
+# Scatter plot for "Shot Saved" and "Post"
+sc_ontarget = pitch.scatter(df_ontarget.EventX, df_ontarget.EventY,
+                            s=(df_ontarget.xG * 900) + 100,
+                            c='#b94b75',
+                            edgecolors='#383838',
+                            marker='^',  # You can choose a different marker for on-target shots
+                            label='On Target',
+                            ax=shot_ax)
+
+# Scatter plot for "Miss"
+sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
+                        s=(df_miss.xG * 900) + 100,
+                        c='#b94b75',
+                        edgecolors='#383838',
+                        marker='x',
+                        label='Misses',
+                        ax=shot_ax)
+
 txt = ax.text(x=40, y=80, s='Barcelona shots\nversus Sevilla',
               size=30,
               # here i am using a downloaded font from google fonts instead of passing a fontdict
