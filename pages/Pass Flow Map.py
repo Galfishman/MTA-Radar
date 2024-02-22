@@ -194,6 +194,15 @@ pitch = Pitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
                       half=True,  # half of a pitch
                       goal_type='box',
                       goal_alpha=0.8)  # control the goal transparency
+
+play_type_markers = {
+    'Goal': 'o',
+    'Miss': 'x',
+    'PenaltyGoal': '^',
+    'Post': 's',
+    'Shot Saved': 'D'
+}
+    
 shot_fig, shot_ax = pitch.draw(figsize=(12, 10))
 sc = pitch.scatter(df_shots.EventX, df_shots.EventY,
                    # size varies between 100 and 1000 (points squared)
@@ -201,7 +210,7 @@ sc = pitch.scatter(df_shots.EventX, df_shots.EventY,
                    c='#b94b75',  # color for scatter in hex format
                    edgecolors='#383838',  # give the markers a charcoal border
                    # for other markers types see: https://matplotlib.org/api/markers_api.html
-                   marker='h',
+                   marker=play_type_markers,
                    ax=shot_ax)
 txt = ax.text(x=40, y=80, s='Barcelona shots\nversus Sevilla',
               size=30,
