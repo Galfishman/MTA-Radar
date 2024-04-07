@@ -4,10 +4,18 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from mplsoccer import Pitch
 from scipy.ndimage import gaussian_filter
+from matplotlib.colors import LinearSegmentedColormap
 import matplotlib.patheffects as path_effects
+from mplsoccer import VerticalPitch, FontManager
+from matplotlib.colors import ListedColormap
 from matplotlib.colorbar import ColorbarBase
-from mplsoccer import VerticalPitch
-
+import matplotlib.colors as mcolors
+import matplotlib.patheffects as pe
+from matplotlib.ticker import MaxNLocator, FuncFormatter
+import sklearn
+from sklearn.cluster import KMeans
+import numpy as np
+pd.options.mode.chained_assignment = None  # default='warn'
 # Set matplotlib parameters
 rcParams['text.color'] = '#c7d5cc'  # set the default text color
 
