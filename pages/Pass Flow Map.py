@@ -318,13 +318,12 @@ st.pyplot(fig)
 #####################################################################################################################################################################
 
 
-df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved"))]
-df_shots.loc[:, 'Date'] = pd.to_datetime(df_shots['Date'], errors='coerce')
-# Filter for "Goal" and "PenaltyGoal"
+df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "AttemptSaved"))]
+#Filter for "Goal" and "PenaltyGoal"
 df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
 
 # Filter for "Shot Saved" and "Post"
-df_ontarget = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Shot Saved") | (df_shots['playType'] == "Post"))]
+df_ontarget = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "AttemptSaved") | (df_shots['playType'] == "Post"))]
 
 # Filter for "Miss"
 df_miss = df_shots[(df_shots['teamFullName'] == TeamPick) & (df_shots['playType'] == "Miss")]
@@ -371,4 +370,3 @@ title_text = 'Shots'  # Customize the title as needed
 txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=12, ha='center')
 
 st.pyplot(shot_fig)
-st.write(recent_dates)
