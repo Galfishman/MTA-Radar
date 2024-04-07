@@ -114,7 +114,7 @@ labels = pitch.label_heatmap(bin_statistic_pass, color='white', fontsize=11,
                              str_format='{:0.0%}', path_effects=path_eff)
 
 # Display the pass flow map with custom colormap using Streamlit
-ax_title = ax_pass.set_title(f'{TeamPick} Passes zones', fontsize=20, pad=-20)
+ax_title = ax_pass.set_title(f'{TeamPick} Passes zones', fontsize=20, pad=-10)
 
 st.pyplot(fig_pass)
 
