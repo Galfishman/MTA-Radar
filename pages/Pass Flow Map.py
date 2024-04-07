@@ -320,7 +320,6 @@ st.pyplot(fig)
 
 df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "Shot Saved"))]
 df_shots.loc[:, 'Date'] = pd.to_datetime(df_shots['Date'], errors='coerce')
-df_shots = df_shots[df_shots['Date'].isin(recent_dates)]
 # Filter for "Goal" and "PenaltyGoal"
 df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
 
