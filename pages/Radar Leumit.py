@@ -12,7 +12,6 @@ import math
 import matplotlib as mpl
 
 # Set the default font family for Matplotlib
-plt.rcParams['font.family'] = 'Arial'  # You can replace 'Arial' with any font available on your system
 
 
 st.title("MTA RADAR Comparison")
