@@ -16,7 +16,7 @@ import matplotlib as mpl
 
 st.title("MTA RADAR Comparison")
 # READ DATA
-df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/pages/Leumit%20Players.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Confrence%20Export.csv')
 Team = "teamName"
 
 
