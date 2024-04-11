@@ -199,6 +199,9 @@ st.pyplot(fig)
 
 df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "AttemptSaved"))]
 #Filter for "Goal" and "PenaltyGoal"
+if PasserPick != "All":
+    df_shots = df_shots[df_shots['toucher'] == PasserPick]
+
 df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
 
 # Filter for "Shot Saved" and "Post"
