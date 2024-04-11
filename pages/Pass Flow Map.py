@@ -44,11 +44,11 @@ passers = df_pass['Passer'].unique().tolist()
 passers.insert(0, "All")
 
 # Sidebar for passer selection
-PasserPick = st.sidebar.selectbox('Select Passer', passers)
+PasserPick = st.sidebar.selectbox('Select Player', passers)
 
 # Filter df_pass by selected passer or show all if "All" is selected
 if PasserPick != "All":
-    df_pass = df_pass[df_pass['Passer'] == PasserPick]
+    df_pass = df_pass[df_pass['toucher'] == PasserPick]
 
 End_Zone_Display = st.sidebar.checkbox('Display End Zone')
 if End_Zone_Display:
