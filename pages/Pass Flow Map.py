@@ -20,7 +20,13 @@ pd.options.mode.chained_assignment = None  # default='warn'
 rcParams['text.color'] = '#c7d5cc'  # set the default text color
 
 # Load data
-df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/pages/export.csv')
+df = pd.read_csv(
+    'https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/pages/export.csv',
+    dtype={
+        34: str,  # Assuming you want to treat column 34 as string to handle mixed types
+        # Add other columns as necessary
+    }
+)
 
 #  Streamlit app
 st.title('Passing details plots')
