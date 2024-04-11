@@ -174,7 +174,7 @@ N_clusters = 30
 
 # K-means clustering
 X_1 = np.array(df_pass[['EventX', 'EventY', 'PassEndX', 'PassEndY', 'PassAngle', 'PassLength']])
-kmeans = KMeans(n_clusters=N_clusters, random_state=0).fit(X_1)
+kmeans = KMeans(n_clusters=N_clusters, n_init=10, random_state=0).fit(X_1)
 cluster_labels = kmeans.predict(X_1)
 df_pass['n_cluster'] = cluster_labels
 
@@ -245,7 +245,7 @@ N_clusters_box = 10
 
 # K-means clustering for passes ending inside the box
 X_box = np.array(box_passes[['EventX', 'EventY', 'PassEndX', 'PassEndY', 'PassAngle', 'PassLength']])
-kmeans_box = KMeans(n_clusters=N_clusters_box, random_state=0).fit(X_box)
+kmeans_box = KMeans(n_clusters=N_clusters_box, n_init=10, random_state=0).fit(X_box)
 cluster_labels_box = kmeans_box.predict(X_box)
 box_passes['n_cluster'] = cluster_labels_box
 
