@@ -247,6 +247,12 @@ sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
 
 title_text = f"{TeamPick} Shots"  # Customize the title as needed
 txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=20, ha='center',color='Black')
+# Text for goal count at the bottom of the plot
+
+goal_count = len(df_goals)  # Count the number of goals
+goal_count_text = f"Total Goals: {goal_count}"
+# Adjust the y-position (e.g., y=-0.1) to move the text below the pitch. Adjust 'ha' and 'va' for alignment.
+txt_goal_count = shot_ax.text(0.5, -0.1, goal_count_text, transform=shot_ax.transAxes, fontsize=12, ha='center', va='top', color='black')
 
 st.pyplot(shot_fig)
 
