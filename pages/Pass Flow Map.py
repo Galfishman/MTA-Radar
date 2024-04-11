@@ -168,6 +168,89 @@ st.pyplot(fig_xa)
 
 
 
+
+#####################################################################################################################################################################
+
+
+# Create pitch object
+pitch = Pitch(pitch_type='opta', line_zorder=2, line_color='black', pitch_color='black',linewidth=4)
+bins = (6, 4)
+
+# Plot pass flow map
+fig, ax = pitch.draw(figsize=(16, 11), constrained_layout=True, tight_layout=False)
+fig.set_facecolor('black')
+
+# plot the heatmap - darker colors = more passes originating from that square
+bs_heatmap = pitch.bin_statistic(df_pass.EventX, df_pass.EventY, statistic='count', bins=bins)
+hm = pitch.heatmap(bs_heatmap, ax=ax, cmap='Blues')
+# plot the pass flow map with a single color ('black') and length of the arrow (5)
+fm = pitch.flow(df_pass.EventX, df_pass.EventY, df_pass.PassEndX, df_pass.PassEndY,color='grey',
+                arrow_type='average', arrow_length=15, bins=bins, ax=ax)
+
+ax_title = ax.set_title(f'{TeamPick} pass flow map', fontsize=30, pad=-20)
+
+
+
+# Display the plot using Streamlit
+st.pyplot(fig)
+
+#####################################################################################################################################################################
+
+
+df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "AttemptSaved"))]
+#Filter for "Goal" and "PenaltyGoal"
+df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
+
+# Filter for "Shot Saved" and "Post"
+df_ontarget = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "AttemptSaved") | (df_shots['playType'] == "Post"))]
+
+# Filter for "Miss"
+df_miss = df_shots[(df_shots['teamFullName'] == TeamPick) & (df_shots['playType'] == "Miss")]
+
+
+pitch = VerticalPitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
+                      pitch_type='opta',
+                      half=True,  # half of a pitch
+                      goal_type='box',
+                      goal_alpha=0.8)  # control the goal transparency
+
+
+shot_fig, shot_ax = pitch.draw(figsize=(10, 8))
+sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
+                         s=(df_goals.xG * 900) + 100,
+                         c='white',
+                         edgecolors='#383838',
+                         marker='*',  # You can choose a different marker for goals
+                         label='Goals',
+                         ax=shot_ax,
+                         zorder = 2)
+
+# Scatter plot for "Shot Saved" and "Post"
+sc_ontarget = pitch.scatter(df_ontarget.EventX, df_ontarget.EventY,
+                            s=(df_ontarget.xG * 900) + 100,
+                            c='blue',
+                            edgecolors='white',
+                            marker='o',  # You can choose a different marker for on-target shots
+                            label='On Target',
+                            alpha = 0.8,
+                            ax=shot_ax)
+
+# Scatter plot for "Miss"
+sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
+                        s=(df_miss.xG * 900) + 100,
+                        c='grey',
+                        edgecolors='white',
+                        marker='X',
+                        label='Misses',
+                        ax=shot_ax,
+                        alpha = 0.3)
+
+title_text = f"{TeamPick} Shots"  # Customize the title as needed
+txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=20, ha='center',color='Black')
+
+st.pyplot(shot_fig)
+
+
  #####################################################################################################################################################################
 # Number of clusters
 N_clusters = 30
@@ -295,84 +378,3 @@ fig_box.set_facecolor('black')
 # Display the plot for passes ending inside the box using Streamlit
 st.pyplot(fig_box)
 
-
-#####################################################################################################################################################################
-
-
-# Create pitch object
-pitch = Pitch(pitch_type='opta', line_zorder=2, line_color='black', pitch_color='black',linewidth=4)
-bins = (6, 4)
-
-# Plot pass flow map
-fig, ax = pitch.draw(figsize=(16, 11), constrained_layout=True, tight_layout=False)
-fig.set_facecolor('black')
-
-# plot the heatmap - darker colors = more passes originating from that square
-bs_heatmap = pitch.bin_statistic(df_pass.EventX, df_pass.EventY, statistic='count', bins=bins)
-hm = pitch.heatmap(bs_heatmap, ax=ax, cmap='Blues')
-# plot the pass flow map with a single color ('black') and length of the arrow (5)
-fm = pitch.flow(df_pass.EventX, df_pass.EventY, df_pass.PassEndX, df_pass.PassEndY,color='grey',
-                arrow_type='average', arrow_length=15, bins=bins, ax=ax)
-
-ax_title = ax.set_title(f'{TeamPick} pass flow map', fontsize=30, pad=-20)
-
-
-
-# Display the plot using Streamlit
-st.pyplot(fig)
-
-#####################################################################################################################################################################
-
-
-df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "AttemptSaved"))]
-#Filter for "Goal" and "PenaltyGoal"
-df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
-
-# Filter for "Shot Saved" and "Post"
-df_ontarget = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "AttemptSaved") | (df_shots['playType'] == "Post"))]
-
-# Filter for "Miss"
-df_miss = df_shots[(df_shots['teamFullName'] == TeamPick) & (df_shots['playType'] == "Miss")]
-
-
-pitch = VerticalPitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
-                      pitch_type='opta',
-                      half=True,  # half of a pitch
-                      goal_type='box',
-                      goal_alpha=0.8)  # control the goal transparency
-
-
-shot_fig, shot_ax = pitch.draw(figsize=(10, 8))
-sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
-                         s=(df_goals.xG * 900) + 100,
-                         c='white',
-                         edgecolors='#383838',
-                         marker='*',  # You can choose a different marker for goals
-                         label='Goals',
-                         ax=shot_ax,
-                         zorder = 2)
-
-# Scatter plot for "Shot Saved" and "Post"
-sc_ontarget = pitch.scatter(df_ontarget.EventX, df_ontarget.EventY,
-                            s=(df_ontarget.xG * 900) + 100,
-                            c='blue',
-                            edgecolors='white',
-                            marker='o',  # You can choose a different marker for on-target shots
-                            label='On Target',
-                            alpha = 0.8,
-                            ax=shot_ax)
-
-# Scatter plot for "Miss"
-sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
-                        s=(df_miss.xG * 900) + 100,
-                        c='grey',
-                        edgecolors='white',
-                        marker='X',
-                        label='Misses',
-                        ax=shot_ax,
-                        alpha = 0.3)
-
-title_text = f"{TeamPick} Shots"  # Customize the title as needed
-txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=12, ha='center')
-
-st.pyplot(shot_fig)
