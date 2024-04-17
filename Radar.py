@@ -6,7 +6,7 @@ from mplsoccer import PyPizza
 import matplotlib as mpl
 
 ###login
-st.title("MTA RADAR Comparison")
+st.title("MTA RADAR Comparison Data is per 90 min")
 
 # READ DATA
 df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/Players%20Per%2090.csv')
