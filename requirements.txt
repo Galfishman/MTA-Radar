@@ -71,5 +71,5 @@ mplsoccer==1.0.6
 session_info==1.0.0
 soccerplots==1.0.0
 streamlit==1.23.0
-pip==23.1.2
+pip==24.0.0
 scikit-learn==1.2.2
