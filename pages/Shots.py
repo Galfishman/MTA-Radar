@@ -12,8 +12,6 @@ from matplotlib.colorbar import ColorbarBase
 import matplotlib.colors as mcolors
 import matplotlib.patheffects as pe
 from matplotlib.ticker import MaxNLocator, FuncFormatter
-import sklearn
-from sklearn.cluster import KMeans
 import numpy as np
 pd.options.mode.chained_assignment = None  # default='warn'
 # Set matplotlib parameters
@@ -104,8 +102,9 @@ sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
                         ax=shot_ax,
                         alpha = 0.3)
 
-title_text = f"{TeamPick} Shots"  # Customize the title as needed
-txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=20, ha='center',color='Black')
+title_text = f"{PasserPick if PasserPick != 'All' else TeamPick} Shots"
+txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=20, ha='center', color='Black')
+
 # Text for goal count at the bottom of the plot
 
 goal_count = len(df_goals)  # Count the number of goals
