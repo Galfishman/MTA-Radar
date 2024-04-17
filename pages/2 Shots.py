@@ -117,11 +117,11 @@ total_xg = df_shots['xG'].sum()
 
 # Adjust the goal count text to include these metrics
 goal_count_text = f"Goals: {goal_count}"
-shots_text = f"Shots: {total_shots} ({shots_on_target} On Target)"
+shots_text = f"Shots: {total_shots} "
 xg_text = f"xG: {total_xg:.2f}"  # formatted to 2 decimal places
 
 # Position and display the metrics on the plot
-txt_goal_count = shot_ax.text(0.5, -0.1, f"{goal_count_text}\n{shots_text}\n{xg_text}", transform=shot_ax.transAxes, fontsize=12, ha='center', va='top', color='black')
+txt_goal_count = shot_ax.text(0.5, 1, f"{goal_count_text}\n{shots_text}\n{xg_text}", transform=shot_ax.transAxes, fontsize=12, ha='center', va='top', color='black')
 
 # Now, display the plot in Streamlit
 st.pyplot(shot_fig)
