@@ -83,7 +83,7 @@ cbar_gaussian.ax.yaxis.set_tick_params(color='#efefef')
 ticks_gaussian = plt.setp(plt.getp(cbar_gaussian.ax.axes, 'yticklabels'), color='#efefef')
 
 # Set title for Gaussian smoothed heatmap
-ax_title_gaussian = ax_gaussian.set_title(f"{TeamPick} - {PasserPick} Heat Map" if PasserPick != "All" else f"{TeamPick} Heat Map", fontsize=16, color='#efefef')
+ax_title_gaussian = ax_gaussian.set_title(f"{PasserPick} Heat Map" if PasserPick != "All" else f"{TeamPick} Heat Map", fontsize=16, color='#efefef')
 
 # Display the Gaussian smoothed heatmap using Streamlit
 st.pyplot(fig_gaussian)
@@ -120,7 +120,7 @@ labels = pitch.label_heatmap(bin_statistic_pass, color='white', fontsize=11,
                              str_format='{:0.0%}', path_effects=path_eff)
 
 # Display the pass flow map with custom colormap using Streamlit
-ax_title = ax_pass.set_title(f'{TeamPick} Passes zones', fontsize=20, pad=10)
+ax_title = ax_pass.set_title(f"{PasserPick} Passes zones" if PasserPick != "All" else f"{TeamPick} Passes zones", fontsize=20, pad=10)
 
 st.pyplot(fig_pass)
 
@@ -158,7 +158,7 @@ cbar.ax.tick_params(colors='white') # Change tick text color to white
 # Overlaying the KDE plot on the VerticalPitch
 # Adding a title to the plot with a custom font
 title_font = {'fontname': 'DejaVu Sans', 'color': 'white', 'fontsize': 20}
-ax_xa.set_title(f'{TeamPick} xA Heat Map', **title_font)
+ax_xa.set_title(f"{PasserPick} xA Heat Map" if PasserPick != "All" else f"{TeamPick} xA Heat Map", **title_font)
 fig_xa.set_facecolor("black")
 ax_xa.set_facecolor("black")
 
@@ -187,7 +187,7 @@ hm = pitch.heatmap(bs_heatmap, ax=ax, cmap='Blues')
 fm = pitch.flow(df_pass.EventX, df_pass.EventY, df_pass.PassEndX, df_pass.PassEndY,color='grey',
                 arrow_type='average', arrow_length=15, bins=bins, ax=ax)
 
-ax_title = ax.set_title(f'{TeamPick} pass flow map', fontsize=30, pad=-20)
+ax_title = ax.set_title(f"{PasserPick} pass flow map" if PasserPick != "All" else f"{TeamPick} pass flow map", fontsize=30, pad=-20)
 
 
 
