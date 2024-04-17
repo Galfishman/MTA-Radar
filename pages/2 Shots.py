@@ -110,9 +110,22 @@ txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=20,
 goal_count = len(df_goals)  # Count the number of goals
 goal_count_text = f"Total Goals: {goal_count}"
 # Adjust the y-position (e.g., y=-0.1) to move the text below the pitch. Adjust 'ha' and 'va' for alignment.
-txt_goal_count = shot_ax.text(0.5, -0.1, goal_count_text, transform=shot_ax.transAxes, fontsize=12, ha='center', va='top', color='black')
+# Calculate counts and xG sums
+total_shots = len(df_shots)
+shots_on_target = len(df_ontarget)
+total_xg = df_shots['xG'].sum()
 
+# Adjust the goal count text to include these metrics
+goal_count_text = f"Goals: {goal_count}"
+shots_text = f"Shots: {total_shots} ({shots_on_target} On Target)"
+xg_text = f"xG: {total_xg:.2f}"  # formatted to 2 decimal places
+
+# Position and display the metrics on the plot
+txt_goal_count = shot_ax.text(0.5, -0.1, f"{goal_count_text}\n{shots_text}\n{xg_text}", transform=shot_ax.transAxes, fontsize=12, ha='center', va='top', color='black')
+
+# Now, display the plot in Streamlit
 st.pyplot(shot_fig)
+
 
 
  
