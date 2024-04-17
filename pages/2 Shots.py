@@ -121,7 +121,7 @@ shots_text = f"Shots: {total_shots} "
 xg_text = f"xG: {total_xg:.2f}"  # formatted to 2 decimal places
 
 # Position and display the metrics on the plot
-txt_goal_count = shot_ax.text(0.5, 0.18, f"{goal_count_text}\n{shots_text}\n{xg_text}", transform=shot_ax.transAxes, fontsize=16, ha='center', va='top', color='black')
+txt_goal_count = shot_ax.text(0.5, 0.12, f"{goal_count_text}\n{shots_text}\n{xg_text}", transform=shot_ax.transAxes, fontsize=16, ha='center', va='top', color='black')
 
 # Now, display the plot in Streamlit
 st.pyplot(shot_fig)
