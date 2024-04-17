@@ -29,7 +29,7 @@ df = pd.read_csv(
 )
 
 #  Streamlit app
-st.title('Passing details plots')
+st.title('Shots details')
 
 # Sidebar for team selection
 TeamPick = st.sidebar.selectbox('Select Team', df['teamFullName'].unique())

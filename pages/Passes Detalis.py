@@ -197,67 +197,6 @@ st.pyplot(fig)
 #####################################################################################################################################################################
 
 
-df_shots = df[(df['teamFullName'] == TeamPick) & ((df['playType'] == "Goal") | (df['playType'] == "Miss") | (df['playType'] == "PenaltyGoal") | (df['playType'] == "Post") | (df['playType'] == "AttemptSaved"))]
-#Filter for "Goal" and "PenaltyGoal"
-if PasserPick != "All":
-    df_shots = df_shots[df_shots['toucher'] == PasserPick]
-
-df_goals = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "Goal") | (df_shots['playType'] == "PenaltyGoal"))]
-
-# Filter for "Shot Saved" and "Post"
-df_ontarget = df_shots[(df_shots['teamFullName'] == TeamPick) & ((df_shots['playType'] == "AttemptSaved") | (df_shots['playType'] == "Post"))]
-
-# Filter for "Miss"
-df_miss = df_shots[(df_shots['teamFullName'] == TeamPick) & (df_shots['playType'] == "Miss")]
-
-
-pitch = VerticalPitch(pad_bottom=0.5,  # pitch extends slightly below halfway line
-                      pitch_type='opta',
-                      half=True,  # half of a pitch
-                      goal_type='box',
-                      goal_alpha=0.8)  # control the goal transparency
-
-
-shot_fig, shot_ax = pitch.draw(figsize=(10, 8))
-sc_goals = pitch.scatter(df_goals.EventX, df_goals.EventY,
-                         s=(df_goals.xG * 900) + 100,
-                         c='white',
-                         edgecolors='#383838',
-                         marker='*',  # You can choose a different marker for goals
-                         label='Goals',
-                         ax=shot_ax,
-                         zorder = 2)
-
-# Scatter plot for "Shot Saved" and "Post"
-sc_ontarget = pitch.scatter(df_ontarget.EventX, df_ontarget.EventY,
-                            s=(df_ontarget.xG * 900) + 100,
-                            c='blue',
-                            edgecolors='white',
-                            marker='o',  # You can choose a different marker for on-target shots
-                            label='On Target',
-                            alpha = 0.8,
-                            ax=shot_ax)
-
-# Scatter plot for "Miss"
-sc_miss = pitch.scatter(df_miss.EventX, df_miss.EventY,
-                        s=(df_miss.xG * 900) + 100,
-                        c='grey',
-                        edgecolors='white',
-                        marker='X',
-                        label='Misses',
-                        ax=shot_ax,
-                        alpha = 0.3)
-
-title_text = f"{TeamPick} Shots"  # Customize the title as needed
-txt = shot_ax.text(0.5, 1, title_text, transform=shot_ax.transAxes, fontsize=20, ha='center',color='Black')
-# Text for goal count at the bottom of the plot
-
-goal_count = len(df_goals)  # Count the number of goals
-goal_count_text = f"Total Goals: {goal_count}"
-# Adjust the y-position (e.g., y=-0.1) to move the text below the pitch. Adjust 'ha' and 'va' for alignment.
-txt_goal_count = shot_ax.text(0.5, -0.1, goal_count_text, transform=shot_ax.transAxes, fontsize=12, ha='center', va='top', color='black')
-
-st.pyplot(shot_fig)
 
 
  
