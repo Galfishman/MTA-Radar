@@ -83,7 +83,7 @@ cbar_gaussian.ax.yaxis.set_tick_params(color='#efefef')
 ticks_gaussian = plt.setp(plt.getp(cbar_gaussian.ax.axes, 'yticklabels'), color='#efefef')
 
 # Set title for Gaussian smoothed heatmap
-ax_title_gaussian = ax_gaussian.set_title(f'{TeamPick} Heat Map', fontsize=16, color='#efefef')
+ax_title_gaussian = ax_gaussian.set_title(f"{TeamPick} - {PasserPick} Heat Map" if PasserPick != "All" else f"{TeamPick} Heat Map", fontsize=16, color='#efefef')
 
 # Display the Gaussian smoothed heatmap using Streamlit
 st.pyplot(fig_gaussian)
