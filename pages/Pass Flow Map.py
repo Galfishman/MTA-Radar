@@ -157,7 +157,7 @@ cbar.ax.tick_params(colors='white') # Change tick text color to white
 
 # Overlaying the KDE plot on the VerticalPitch
 # Adding a title to the plot with a custom font
-title_font = {'color': 'white', 'fontsize': 20}
+title_font = {'fontname': 'DejaVu Sans', 'color': 'white', 'fontsize': 20}
 ax_xa.set_title(f'{TeamPick} xA Heat Map', **title_font)
 fig_xa.set_facecolor("black")
 ax_xa.set_facecolor("black")
