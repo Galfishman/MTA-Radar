@@ -160,11 +160,14 @@ fig, ax = radar.plot_radar(
     compare=True
 )
 
-mpl.rcParams['figure.dpi'] = 2400
+mpl.rcParams['figure.dpi'] = 1500
 
 st.pyplot(fig)
 
-
+##########################################
+##########################################
+##########################################
+##########################################
 
 
 player_data = df.loc[df['Player'] == Name, selected_params].iloc[0]
@@ -205,6 +208,11 @@ fig, ax = baker.make_pizza(
         )
     )                    # values to be used when adding parameter-values
 )
+
+# Change background colors
+fig.patch.set_facecolor('#f5f5f5')  # Light grey figure background
+ax.set_facecolor('#f5f5f5')          # Light grey axes background
+
 
 # Calculate the width and height of the title box
 title = f"{Name} Percentile Rank\n{'Compare to all'} {selected_position_group} {'in'} {'Data Base'}"
