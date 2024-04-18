@@ -170,56 +170,81 @@ mpl.rcParams['figure.dpi'] = 1500
 
 
 player_data = filtered_players.loc[filtered_players['Player'] == Name, selected_params].iloc[0]
-values = [math.floor(stats.percentileofscore(filtered_players[param], player_data[param])) for param in selected_params]
+# Calculate percentiles for Name
+values_name = [
+    math.floor(stats.percentileofscore(filtered_players[param], player_data[param]))
+    for param in selected_params
+]
+
+# Fetch player data for Name2 if not 'League Average'
+if Name2 != "League Average":
+    player_data2 = filtered_players.loc[filtered_players['Player'] == Name2, selected_params].iloc[0]
+    values_name2 = [
+        math.floor(stats.percentileofscore(filtered_players[param], player_data2[param]))
+        for param in selected_params
+    ]
+else:
+    # Calculate league average values if Name2 is 'League Average'
+    league_average_data = filtered_players[selected_params].mean()
+    values_name2 = [
+        math.floor(stats.percentileofscore(filtered_players[param], league_average_data[param]))
+        for param in selected_params
+    ]
 
 # Create a table to display the statistic names and values
 table_data = {'Statistic': selected_params, 'Value': player_data[selected_params]}
 table_df = pd.DataFrame(table_data)
 ### PRECEPLIE PIZZA
-
+# Configuring the pizza plot
 baker = PyPizza(
-    params=params,                  # list of parameters
-    straight_line_color="white",  # color for straight lines
-    straight_line_lw=2,             # linewidth for straight lines
-    last_circle_lw=3,
-    last_circle_color= 'white',                              # linewidth of last circle
-    other_circle_lw=1,   
-    other_circle_color='grey',           # linewidth for other circles
-    other_circle_ls="-."            # linestyle for other circles
+    params=selected_params,                  # list of parameters
+    straight_line_color="white",             # color for straight lines
+    straight_line_lw=2,                      # linewidth for straight lines
+    last_circle_lw=3,                        # linewidth of last circle
+    last_circle_color='white',               # color of last circle
+    other_circle_lw=1,                       # linewidth for other circles
+    other_circle_color='grey',               # color of other circles
+    other_circle_ls="-."                     # linestyle for other circles
 )
 
-fig2, ax2 = baker.make_pizza(
-    values,              # list of values
-    figsize=(10, 10),      # adjust figsize according to your need
-    param_location=105,  # where the parameters will be added
+# Create pizza plot with values for both players
+fig, ax = baker.make_pizza(
+    [values_name, values_name2],            # list of two players' values
+    compare=True,                           # enable comparison
+    figsize=(10, 10),                       # figure size
+    param_location=105,                     # parameter label location
     kwargs_slices=dict(
-        facecolor="cornflowerblue", edgecolor='white',
-        zorder=2, linewidth=3
-    ),                   # values to be used when plotting slices
+        facecolor=["cornflowerblue", "salmon"],  # colors for each player's slices
+        edgecolor='white',                  # edge color of slices
+        zorder=2,                           # drawing order
+        linewidth=3                         # slice border linewidth
+    ),
     kwargs_params=dict(
-        color="white", fontsize=10,
-        va="center"
-    ),                   # values to be used when adding parameter
-    kwargs_values=dict(
-        color="white", fontsize=12,
-        zorder=3,
+        color="white",                      # parameter label color
+        fontsize=10,                        # parameter label fontsize
+        va="center"                         # alignment of parameter labels
+    ),
+    kwargs_compare=dict(
+        colors=["white", "white"],          # colors for text in compare mode
+        zorder=3,                           # drawing order for text
         bbox=dict(
-            edgecolor="#000000", facecolor="cornflowerblue",
-            boxstyle="round,pad=0.2", lw=1
+            edgecolor="white",              # box edge color
+            facecolor=["cornflowerblue", "salmon"],  # box face color
+            boxstyle="round,pad=0.2",       # box style
+            lw=1                            # box line width
         )
-    )                    # values to be used when adding parameter-values
+    )
 )
+fig.patch.set_facecolor('#121212')  # Set background color for the figure
+ax.set_facecolor('#121212')         # Set background color for the axes
 
-# Change background colors
-fig2.patch.set_facecolor('#121212')  # Light grey figure background
-ax2.set_facecolor('#121212')          # Light grey axes background
+# Adding titles and annotations as needed
+title = f"Comparison of {Name} and {Name2}\nPercentile Ranks"
+fig.text(0.5, 0.97, title, size=18, ha="center", color="white", fontweight="bold")
 
+# Show plot in Streamlit
+st.pyplot(fig)
 
-# Calculate the width and height of the title box
-title = f"{Name} Percentile Rank\n{'Compare to all'} {selected_position_group} {'in'} {'Ligat Haal'}"
-title_bbox_props = dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#000000", lw=1)
-# Add the title box
-fig2.text(0.515, 0.97, title, size=18, ha="center", color="#000000", bbox=title_bbox_props)
 
 
 
