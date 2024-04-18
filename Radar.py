@@ -211,8 +211,8 @@ fig2, ax2 = baker.make_pizza(
 )
 
 # Change background colors
-fig2.patch.set_facecolor('black')  # Light grey figure background
-ax2.set_facecolor('black')          # Light grey axes background
+fig2.patch.set_facecolor('#121212')  # Light grey figure background
+ax2.set_facecolor('#121212')          # Light grey axes background
 
 
 # Calculate the width and height of the title box
@@ -233,7 +233,7 @@ param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to co
 
 
 # Display plots side by side with a gap
-col1, col2 = st.columns([1, 1], gap='medium')  # you can also use specific pixel values like gap=30
+col1, col2 = st.columns([1, 1], gap='large')  # you can also use specific pixel values like gap=30
 with col1:
     st.header("Values Radar Plot")
     st.pyplot(fig)
