@@ -180,7 +180,7 @@ table_df = pd.DataFrame(table_data)
 
 baker = PyPizza(
     params=params,                  # list of parameters
-    straight_line_color="#000000",  # color for straight lines
+    straight_line_color="white",  # color for straight lines
     straight_line_lw=1,             # linewidth for straight lines
     last_circle_lw=1,               # linewidth of last circle
     other_circle_lw=1,              # linewidth for other circles
@@ -192,7 +192,7 @@ fig, ax = baker.make_pizza(
     figsize=(8, 8),      # adjust figsize according to your need
     param_location=105,  # where the parameters will be added
     kwargs_slices=dict(
-        facecolor="cornflowerblue", edgecolor="#000000",
+        facecolor="cornflowerblue", edgecolor="white",
         zorder=2, linewidth=1
     ),                   # values to be used when plotting slices
     kwargs_params=dict(
@@ -203,7 +203,7 @@ fig, ax = baker.make_pizza(
         color="white", fontsize=12,
         zorder=3,
         bbox=dict(
-            edgecolor="#000000", facecolor="cornflowerblue",
+            edgecolor="white", facecolor="cornflowerblue",
             boxstyle="round,pad=0.2", lw=1
         )
     )                    # values to be used when adding parameter-values
