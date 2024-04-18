@@ -212,7 +212,7 @@ fig2, ax2 = baker.make_pizza(
 
 # Change background colors
 fig2.patch.set_facecolor('black')  # Light grey figure background
-ax2.set_facecolor('#black')          # Light grey axes background
+ax2.set_facecolor('black')          # Light grey axes background
 
 
 # Calculate the width and height of the title box
