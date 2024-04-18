@@ -193,7 +193,7 @@ fig2, ax2 = baker.make_pizza(
     figsize=(10, 10),      # adjust figsize according to your need
     param_location=105,  # where the parameters will be added
     kwargs_slices=dict(
-        facecolor="cornflowerblue", edgecolor='grey',
+        facecolor="cornflowerblue", edgecolor='white',
         zorder=2, linewidth=3
     ),                   # values to be used when plotting slices
     kwargs_params=dict(
