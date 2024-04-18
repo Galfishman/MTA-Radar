@@ -273,7 +273,7 @@ def highlight_max(s):
     return ['background-color: lightgreen' if v else '' for v in is_max]
 
 # Apply formatting to the DataFrame for display in Streamlit
-highlighted_df = head_to_head_df_transposed.style.apply(highlight_max).format("{:.2f}")
+highlighted_df = head_to_head_df_transposed.style.format("{:.2f}").apply(lambda row: ['background-color: grey' if val == row.max() else '' for val in row], axis=1)
 st.header("Head-to-Head Comparison")
 st.table(highlighted_df)
 
