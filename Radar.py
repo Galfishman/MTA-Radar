@@ -182,7 +182,8 @@ baker = PyPizza(
     params=params,                  # list of parameters
     straight_line_color="#000000",  # color for straight lines
     straight_line_lw=1,             # linewidth for straight lines
-    last_circle_lw=1,               # linewidth of last circle
+    last_circle_lw=3,
+    last_circle_color= 'white',                              # linewidth of last circle
     other_circle_lw=1,              # linewidth for other circles
     other_circle_ls="-."            # linestyle for other circles
 )
@@ -193,7 +194,7 @@ fig, ax = baker.make_pizza(
     param_location=105,  # where the parameters will be added
     kwargs_slices=dict(
         facecolor="cornflowerblue", edgecolor="#000000",
-        zorder=2, linewidth=5
+        zorder=2, linewidth=3
     ),                   # values to be used when plotting slices
     kwargs_params=dict(
         color="#000000", fontsize=7.5,
