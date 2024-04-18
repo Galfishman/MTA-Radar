@@ -162,7 +162,6 @@ fig, ax = radar.plot_radar(
 
 mpl.rcParams['figure.dpi'] = 1500
 
-st.pyplot(fig)
 
 ##########################################
 ##########################################
@@ -235,11 +234,16 @@ param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to co
 table_props = dict(facecolor="#cccccc", edgecolor="#000000", lw=1, linestyle="-")
 fig2.text(0.515, param_value_y, param_value_text, size=12, ha="center",weight="bold", color="#000000", bbox=table_props)
 
-# Display the plot
-st.pyplot(fig2)
 
 
-
+# Display plots side by side
+col1, col2 = st.columns(2)
+with col1:
+    st.header("Radar Plot")
+    st.pyplot(fig)
+with col2:
+    st.header("Pizza Plot")
+    st.pyplot(fig2)
 
 
 
