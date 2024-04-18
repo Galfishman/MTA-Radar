@@ -231,9 +231,6 @@ for param, value in zip(selected_params, player_data):
 num_params = len(selected_params)
 param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to control the vertical position
 
-# Add the param_value_text box
-table_props = dict(facecolor="#cccccc", edgecolor="#000000", lw=1, linestyle="-")
-fig2.text(0.515, param_value_y, param_value_text, size=12, ha="center",weight="bold", color="#000000", bbox=table_props)
 
 
 
