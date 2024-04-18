@@ -232,18 +232,14 @@ num_params = len(selected_params)
 param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to control the vertical position
 
 
-
-
-# Display plots side by side
-col1, col2 = st.columns(2)
+# Display plots side by side with a gap
+col1, col2 = st.columns([1, 1], gap='medium')  # you can also use specific pixel values like gap=30
 with col1:
     st.header("Values Radar Plot")
     st.pyplot(fig)
 with col2:
     st.header("Percentile Plot")
     st.pyplot(fig2)
-
-
 
 
 
