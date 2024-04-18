@@ -184,7 +184,7 @@ baker = PyPizza(
     last_circle_lw=3,
     last_circle_color= 'white',                              # linewidth of last circle
     other_circle_lw=1,   
-    other_circle_color='grey'           # linewidth for other circles
+    other_circle_color='grey',           # linewidth for other circles
     other_circle_ls="-."            # linestyle for other circles
 )
 
