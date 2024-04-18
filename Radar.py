@@ -179,11 +179,12 @@ table_df = pd.DataFrame(table_data)
 
 baker = PyPizza(
     params=params,                  # list of parameters
-    straight_line_color="#000000",  # color for straight lines
-    straight_line_lw=1,             # linewidth for straight lines
+    straight_line_color="white",  # color for straight lines
+    straight_line_lw=2,             # linewidth for straight lines
     last_circle_lw=3,
     last_circle_color= 'white',                              # linewidth of last circle
-    other_circle_lw=1,              # linewidth for other circles
+    other_circle_lw=1,   
+    other_circle_color='grey'           # linewidth for other circles
     other_circle_ls="-."            # linestyle for other circles
 )
 
@@ -192,15 +193,15 @@ fig2, ax2 = baker.make_pizza(
     figsize=(10, 10),      # adjust figsize according to your need
     param_location=105,  # where the parameters will be added
     kwargs_slices=dict(
-        facecolor="cornflowerblue", edgecolor="#000000",
+        facecolor="cornflowerblue", edgecolor='grey',
         zorder=2, linewidth=3
     ),                   # values to be used when plotting slices
     kwargs_params=dict(
-        color="#000000", fontsize=7.5,
+        color="white", fontsize=10,
         va="center"
     ),                   # values to be used when adding parameter
     kwargs_values=dict(
-        color="#000000", fontsize=12,
+        color="white", fontsize=12,
         zorder=3,
         bbox=dict(
             edgecolor="#000000", facecolor="cornflowerblue",
@@ -210,8 +211,8 @@ fig2, ax2 = baker.make_pizza(
 )
 
 # Change background colors
-fig2.patch.set_facecolor('#f5f5f5')  # Light grey figure background
-ax2.set_facecolor('#f5f5f5')          # Light grey axes background
+fig2.patch.set_facecolor('black')  # Light grey figure background
+ax2.set_facecolor('#black')          # Light grey axes background
 
 
 # Calculate the width and height of the title box
