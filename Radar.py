@@ -209,8 +209,7 @@ baker = PyPizza(
 
 # Create pizza plot with values for both players
 fig, ax = baker.make_pizza(
-    [values_name, values_name2],            # list of two players' values
-    compare=True,                           # enable comparison
+    [values_name, values_name2],            # list of two players' values                           # enable comparison
     figsize=(10, 10),                       # figure size
     param_location=105,                     # parameter label location
     kwargs_slices=dict(
