@@ -171,7 +171,7 @@ st.pyplot(fig)
 
 
 player_data = filtered_players.loc[filtered_players['Player'] == Name, selected_params].iloc[0]
-values = [math.floor(stats.percentileofscore(df[param], player_data[param])) for param in selected_params]
+values = [math.floor(stats.percentileofscore(filtered_players[param], player_data[param])) for param in selected_params]
 
 # Create a table to display the statistic names and values
 table_data = {'Statistic': selected_params, 'Value': player_data[selected_params]}
@@ -215,7 +215,7 @@ ax.set_facecolor('#f5f5f5')          # Light grey axes background
 
 
 # Calculate the width and height of the title box
-title = f"{Name} Percentile Rank\n{'Compare to all'} {selected_position_group} {'in'} {'Data Base'}"
+title = f"{Name} Percentile Rank\n{'Compare to all'} {selected_position_group} {'in'} {"Ligat Ha'al"}"
 title_bbox_props = dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#000000", lw=1)
 # Add the title box
 fig.text(0.515, 0.97, title, size=18, ha="center", color="#000000", bbox=title_bbox_props)
