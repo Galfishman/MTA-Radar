@@ -33,31 +33,39 @@ position_mapping = {
 
 st.sidebar.header("Please Filter Here:")
 
-# Filter by position group
-selected_position_group = st.sidebar.selectbox(
-    "Filter by Position Group:",
-    options=list(position_mapping.keys()),
-)
 
-# Filter by Minutes Played (Min)
+# Initialize session state for player selections if not already present
+if 'selected_player' not in st.session_state:
+    st.session_state.selected_player = None
+
+if 'selected_player2' not in st.session_state:
+    st.session_state.selected_player2 = None
+
+# Sidebar for player selection
+selected_position_group = st.sidebar.selectbox("Filter by Position Group:", options=list(position_mapping.keys()))
+
 min_minutes_played = st.sidebar.slider("Filter by Minimum Minutes Played:", min_value=0, max_value=int(df['Min'].max()), step=1, value=0)
 
-# Filter the DataFrame based on the selected position group and minimum minutes played
+# Apply filters
 filtered_players = df[(df['pos'].isin(position_mapping[selected_position_group])) & (df['Min'] >= min_minutes_played)]
-
-# List of players based on the selected position group
 players_list = filtered_players["Player"].unique()
 
-Name = st.sidebar.selectbox(
+# Update session state when player selections are made
+st.session_state.selected_player = st.sidebar.selectbox(
     "Select the Player:",
     options=players_list,
+    index=players_list.index(st.session_state.selected_player) if st.session_state.selected_player in players_list else 0
 )
 
-Name2 = st.sidebar.selectbox(
+st.session_state.selected_player2 = st.sidebar.selectbox(
     "Select other Player:",
-    options=["League Average"] +filtered_players["Player"].unique().tolist(),
+    options=["League Average"] + filtered_players["Player"].unique().tolist(),
+    index=(["League Average"] + filtered_players["Player"].unique().tolist()).index(st.session_state.selected_player2) if st.session_state.selected_player2 in (["League Average"] + filtered_players["Player"].unique().tolist()) else 0
 )
 
+# Use session state variables for further processing
+Name = st.session_state.selected_player
+Name2 = st.session_state.selected_player2
 
     
 # List of all available parameters
