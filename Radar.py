@@ -61,7 +61,7 @@ Name2 = st.sidebar.selectbox(
 
     
 # List of all available parameters
-all_params = list(df.columns)
+all_params = list(df.columns[19:])
 
 # Filtered parameters based on user selection
 selected_params = st.sidebar.multiselect(
