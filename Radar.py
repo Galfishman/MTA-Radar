@@ -4,6 +4,14 @@ import streamlit as st
 from soccerplots.radar_chart import Radar
 from mplsoccer import PyPizza
 import matplotlib as mpl
+from io import BytesIO
+from mplsoccer import PyPizza, FontManager
+import matplotlib as mpl
+import math
+
+
+
+
 
 ###login
 st.title("MTA RADAR Comparison Data is per 90 min")
@@ -153,6 +161,78 @@ fig, ax = radar.plot_radar(
 mpl.rcParams['figure.dpi'] = 2400
 
 st.pyplot(fig)
+
+
+
+
+player_data = df.loc[df['Player'] == Name, selected_params].iloc[0]
+values = [math.floor(stats.percentileofscore(df[param], player_data[param])) for param in selected_params]
+
+# Create a table to display the statistic names and values
+table_data = {'Statistic': selected_params, 'Value': player_data[selected_params]}
+table_df = pd.DataFrame(table_data)
+### PRECEPLIE PIZZA
+
+baker = PyPizza(
+    params=params,                  # list of parameters
+    straight_line_color="#000000",  # color for straight lines
+    straight_line_lw=1,             # linewidth for straight lines
+    last_circle_lw=1,               # linewidth of last circle
+    other_circle_lw=1,              # linewidth for other circles
+    other_circle_ls="-."            # linestyle for other circles
+)
+
+fig, ax = baker.make_pizza(
+    values,              # list of values
+    figsize=(8, 8),      # adjust figsize according to your need
+    param_location=105,  # where the parameters will be added
+    kwargs_slices=dict(
+        facecolor="cornflowerblue", edgecolor="#000000",
+        zorder=2, linewidth=1
+    ),                   # values to be used when plotting slices
+    kwargs_params=dict(
+        color="#000000", fontsize=7.5,
+        va="center"
+    ),                   # values to be used when adding parameter
+    kwargs_values=dict(
+        color="#000000", fontsize=12,
+        zorder=3,
+        bbox=dict(
+            edgecolor="#000000", facecolor="cornflowerblue",
+            boxstyle="round,pad=0.2", lw=1
+        )
+    )                    # values to be used when adding parameter-values
+)
+
+# Calculate the width and height of the title box
+title = f"{Name} Percentile Rank\n{'Compare to all'} {selected_position_group} {'in'} {'Data Base'}"
+title_bbox_props = dict(boxstyle="round,pad=0.3", facecolor="white", edgecolor="#000000", lw=1)
+# Add the title box
+fig.text(0.515, 0.97, title, size=18, ha="center", color="#000000", bbox=title_bbox_props)
+
+
+
+param_value_text = f"{Name}  Values\n"
+for param, value in zip(selected_params, player_data):
+    param_value_text += f"{param} - {value}\n"
+
+# Adjust the vertical position of the param_value_text box based on the number of parameters
+num_params = len(selected_params)
+param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to control the vertical position
+
+# Add the param_value_text box
+table_props = dict(facecolor="#cccccc", edgecolor="#000000", lw=1, linestyle="-")
+fig.text(0.515, param_value_y, param_value_text, size=12, ha="center",weight="bold", color="#000000", bbox=table_props)
+
+# Display the plot
+st.pyplot(fig)
+
+
+
+
+
+
+
 
 head_to_head_df = pd.DataFrame({
     'Player': [Name, Name2],
