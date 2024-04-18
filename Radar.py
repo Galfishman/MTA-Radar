@@ -235,10 +235,10 @@ param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to co
 # Display plots side by side with a gap
 col1, col2 = st.columns([1, 1], gap='large') 
 with col1:
-    st.header("Values Radar Plot")
+    st.header("Values Radar ")
     st.pyplot(fig)
 with col2:
-    st.header("Percentile Plot")
+    st.header("Percentile Rank")
     st.pyplot(fig2)
 
 
