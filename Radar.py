@@ -8,6 +8,8 @@ from io import BytesIO
 from mplsoccer import PyPizza, FontManager
 import matplotlib as mpl
 import math
+from scipy import stats
+
 
 
 
