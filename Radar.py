@@ -196,11 +196,11 @@ fig, ax = baker.make_pizza(
         zorder=2, linewidth=1
     ),                   # values to be used when plotting slices
     kwargs_params=dict(
-        color="#000000", fontsize=7.5,
+        color="white", fontsize=7.5,
         va="center"
     ),                   # values to be used when adding parameter
     kwargs_values=dict(
-        color="#000000", fontsize=12,
+        color="white", fontsize=12,
         zorder=3,
         bbox=dict(
             edgecolor="#000000", facecolor="cornflowerblue",
