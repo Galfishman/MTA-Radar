@@ -240,10 +240,10 @@ fig2.text(0.515, param_value_y, param_value_text, size=12, ha="center",weight="b
 # Display plots side by side
 col1, col2 = st.columns(2)
 with col1:
-    st.header("Radar Plot")
+    st.header("Values Radar Plot")
     st.pyplot(fig)
 with col2:
-    st.header("Pizza Plot")
+    st.header("Percentile Plot")
     st.pyplot(fig2)
 
 
