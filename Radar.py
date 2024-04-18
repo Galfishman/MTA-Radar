@@ -233,7 +233,7 @@ param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to co
 
 
 # Display plots side by side with a gap
-col1, col2 = st.columns([1, 1], gap=40)  # you can also use specific pixel values like gap=30
+col1, col2 = st.columns([1, 1], gap='40')  # you can also use specific pixel values like gap=30
 with col1:
     st.header("Values Radar Plot")
     st.pyplot(fig)
