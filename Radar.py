@@ -246,45 +246,6 @@ with col2:
 
 
 
-def calculate_percentiles(player_values, param):
-    """Helper function to calculate the percentile of a player's value for a given parameter."""
-    return math.floor(stats.percentileofscore(filtered_players[param], player_values))
-
-# Calculate percentile ranks for both players
-a_percentiles = [calculate_percentiles(a_values[i], param) for i, param in enumerate(params)]
-b_percentiles = [calculate_percentiles(b_values[i], param) for i, param in enumerate(params)]
-
-
-# Create head-to-head DataFrame with raw values and percentiles
-head_to_head_df = pd.DataFrame({
-    'Player': [Name, Name2],
-    **{param: [a_values[i], b_values[i]] for i, param in enumerate(params)},
-    **{f"{param} Percentile": [a_percentiles[i], b_percentiles[i]] for i, param in enumerate(params)}
-})
-
-# Transpose the DataFrame
-head_to_head_df_transposed = head_to_head_df.set_index('Player').T
-
-
-
-# Function to apply formatting
-def highlight_max(s):
-    is_max = s == s.max()
-    return ['background-color: lightgreen' if v else '' for v in is_max]
-
-# Apply formatting to the DataFrame for display in Streamlit
-highlighted_df = head_to_head_df_transposed.style.format("{:.2f}").apply(lambda row: ['background-color: grey' if val == row.max() else '' for val in row], axis=1)
-st.header("Head-to-Head Comparison")
-st.table(highlighted_df)
-
-
-
-
-
-
-
-
-
 head_to_head_df = pd.DataFrame({
     'Player': [Name, Name2],
     **{param: [a_values[i], b_values[i]] for i, param in enumerate(params)}
