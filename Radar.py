@@ -231,8 +231,8 @@ num_params = len(selected_params)
 param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to control the vertical position
 
 # Add the param_value_text box
-table_props = dict(facecolor="#cccccc", edgecolor="#000000", lw=1, linestyle="-")
-fig.text(0.515, param_value_y, param_value_text, size=12, ha="center",weight="bold", color="#000000", bbox=table_props)
+table_props = dict(facecolor="#cccccc", edgecolor="white", lw=1, linestyle="-")
+fig.text(0.515, param_value_y, param_value_text, size=12, ha="center",weight="bold", color="white", bbox=table_props)
 
 # Display the plot
 st.pyplot(fig)
