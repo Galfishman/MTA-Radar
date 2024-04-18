@@ -189,7 +189,7 @@ baker = PyPizza(
 
 fig2, ax2 = baker.make_pizza(
     values,              # list of values
-    figsize=(8, 8),      # adjust figsize according to your need
+    figsize=(20, 20),      # adjust figsize according to your need
     param_location=105,  # where the parameters will be added
     kwargs_slices=dict(
         facecolor="cornflowerblue", edgecolor="#000000",
