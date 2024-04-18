@@ -180,7 +180,7 @@ table_df = pd.DataFrame(table_data)
 
 baker = PyPizza(
     params=params,                  # list of parameters
-    straight_line_color="white",  # color for straight lines
+    straight_line_color="#000000",  # color for straight lines
     straight_line_lw=1,             # linewidth for straight lines
     last_circle_lw=1,               # linewidth of last circle
     other_circle_lw=1,              # linewidth for other circles
@@ -192,26 +192,26 @@ fig, ax = baker.make_pizza(
     figsize=(8, 8),      # adjust figsize according to your need
     param_location=105,  # where the parameters will be added
     kwargs_slices=dict(
-        facecolor="cornflowerblue", edgecolor="white",
+        facecolor="cornflowerblue", edgecolor="#000000",
         zorder=2, linewidth=1
     ),                   # values to be used when plotting slices
     kwargs_params=dict(
-        color="white", fontsize=7.5,
+        color="#000000", fontsize=7.5,
         va="center"
     ),                   # values to be used when adding parameter
     kwargs_values=dict(
-        color="white", fontsize=12,
+        color="#000000", fontsize=12,
         zorder=3,
         bbox=dict(
-            edgecolor="white", facecolor="cornflowerblue",
+            edgecolor="#000000", facecolor="cornflowerblue",
             boxstyle="round,pad=0.2", lw=1
         )
     )                    # values to be used when adding parameter-values
 )
 
 # Change background colors
-fig.patch.set_facecolor('black')  # Light grey figure background
-ax.set_facecolor('black')          # Light grey axes background
+fig.patch.set_facecolor('#f5f5f5')  # Light grey figure background
+ax.set_facecolor('#f5f5f5')          # Light grey axes background
 
 
 # Calculate the width and height of the title box
@@ -231,8 +231,8 @@ num_params = len(selected_params)
 param_value_y = -0.11 - (num_params * 0.015)  # Adjust the value as needed to control the vertical position
 
 # Add the param_value_text box
-table_props = dict(facecolor="#cccccc", edgecolor="white", lw=1, linestyle="-")
-fig.text(0.515, param_value_y, param_value_text, size=12, ha="center",weight="bold", color="white", bbox=table_props)
+table_props = dict(facecolor="#cccccc", edgecolor="#000000", lw=1, linestyle="-")
+fig.text(0.515, param_value_y, param_value_text, size=12, ha="center",weight="bold", color="#000000", bbox=table_props)
 
 # Display the plot
 st.pyplot(fig)
