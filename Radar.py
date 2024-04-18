@@ -170,7 +170,7 @@ st.pyplot(fig)
 ##########################################
 
 
-player_data = df.loc[filtered_players['Player'] == Name, selected_params].iloc[0]
+player_data = filtered_players.loc[filtered_players['Player'] == Name, selected_params].iloc[0]
 values = [math.floor(stats.percentileofscore(df[param], player_data[param])) for param in selected_params]
 
 # Create a table to display the statistic names and values
