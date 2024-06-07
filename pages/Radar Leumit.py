@@ -22,10 +22,10 @@ Team = "teamName"
 
 position_mapping = {
     "All": "",
-    "Wingers": ["rw", "lw", "lam", "ram"],
-    "Strikers": ["cf", "st","rcf","lcf"],
-    "Midfielders": ["cmf", "dmf", "rcmf", "lcmf", "amf","LCMF"],
-    "Defenders": ["rb", "cb", "lb", "rcb", "lcb","rwb","lwb"],
+    "Wingers": ["LM", "RM", "LAM", "RAM"],
+    "Strikers": ["CF", "LCF", "RCF"],
+    "Midfielders": ["CAM", "LCAM", "RCAM", "CDM", "LCDM", "RCDM", "LCM", "RCM"],
+    "Defenders": ["CD", "LCD", "RCD", "LD", "RD"],
 }
 
 
