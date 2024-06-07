@@ -79,7 +79,7 @@ all_params = list(df.columns[9:])
 selected_params = st.sidebar.multiselect(
     "Select Parameters:",
     options=all_params,
-    default=("xG", "xA", "Duels per 90", "Passes per 90", "Touches in box per 90","Dribbles per 90","Crosses per 90"))  # Default value is all_params (all parameters selected)
+    default=("xG", "xA", "Actions unsuccessful", "Actions successful", "Final third entries through pass","Lost balls"))  # Default value is all_params (all parameters selected)
 
 params = selected_params
 
