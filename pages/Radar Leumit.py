@@ -95,19 +95,20 @@ a_values = []
 b_values = []
 
 for x in params:
-    a = pd.to_numeric(df[x], errors='coerce').min()
+    a = min(df[x])
     a = a - (a * 0.2)
 
-    b = pd.to_numeric(df[x], errors='coerce').max()
+    b = max(df[x])
     b = b
 
     ranges.append((a, b))
 
 for _, row in df.iterrows():
     if row['Player'] == Name:
-        a_values = pd.to_numeric(row[params], errors='coerce').tolist()
+        a_values = row[params].tolist()
     if row['Player'] == Name2:
-        b_values = pd.to_numeric(row[params], errors='coerce').tolist()
+        b_values = row[params].tolist()
+
 
 if Name2 == "League Average":
     league_average_values = filtered_players[filtered_players['Player'] != Name][params].mean().tolist()
@@ -124,7 +125,6 @@ else:
     else:
         st.error(f"No data available for player: {Name2}")
         st.stop()
-
 
 a_values = a_values[:]
 b_values = b_values[:]
