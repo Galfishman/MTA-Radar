@@ -20,6 +20,9 @@ df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/pa
 Team = "teamName"
 
 
+# Ensure 'Minutes played' is numeric and handle non-numeric gracefully
+df['Minutes played'] = pd.to_numeric(df['Minutes played'], errors='coerce')
+
 position_mapping = {
     "All": "",
     "Wingers": ["LM", "RM", "LAM", "RAM"],
@@ -27,7 +30,6 @@ position_mapping = {
     "Midfielders": ["CAM", "LCAM", "RCAM", "CDM", "LCDM", "RCDM", "LCM", "RCM"],
     "Defenders": ["CD", "LCD", "RCD", "LD", "RD"],
 }
-
 
 st.sidebar.header("Please Filter Here:")
 
@@ -46,11 +48,16 @@ min_minutes_played = st.sidebar.slider(
     value=0
 )
 
+# Check if the selected position group is empty and handle it
+if selected_position_group == "All":
+    filtered_players = df[df['Minutes played'] >= min_minutes_played]
+else:
+    filtered_players = df[
+        df["Position"].str.contains("|".join(position_mapping[selected_position_group]), case=False, na=False) & 
+        (df['Minutes played'] >= min_minutes_played)
+    ]
 
-# Filter the DataFrame based on the selected position group and minimum minutes played
-filtered_players = df[df["Position"].str.contains("|".join(position_mapping[selected_position_group]), case=False) & (df['Minutes played'] >= min_minutes_played)]
 players_list = filtered_players["Player"].unique()
-
 
 
 Name = st.sidebar.selectbox(
