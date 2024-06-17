@@ -97,7 +97,7 @@ b_values = []
 for x in params:
 
     a = min(df[x])
-    a = a
+    a = a - (a * 0.2)
 
     b = max(df[x])
     b = b
