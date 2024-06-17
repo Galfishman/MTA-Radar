@@ -95,8 +95,6 @@ a_values = []
 b_values = []
 
 for x in params:
-    df[x] = pd.to_numeric(df[x], errors='coerce')  # convert to numeric, set non-convertible values to NaN
-    df[x] = df[x].fillna(0)  # or handle NaNs as appropriate, here replacing with 0
 
     a = min(df[x])
     a = a - (a * 0.2)
