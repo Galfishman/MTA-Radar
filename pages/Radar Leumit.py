@@ -158,7 +158,10 @@ title = dict(
     title_name=f"{Name}\n{'Team: ' + team_name1}\n{'Position: '+Position_name1}\n{minutes_player1} Minutes Played",
     title_color='yellow',
     title_name_2=title_name2,
+    title_name3=title_name3
     title_color_2='blue',
+    title_color_3='green',
+
     title_fontsize=12,
 )
 
