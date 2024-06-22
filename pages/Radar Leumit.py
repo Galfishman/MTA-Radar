@@ -171,7 +171,7 @@ if title_name3:
 
 # RADAR PLOT
 radar = Radar(
-    background_color="#121212",
+    background_color="#101118",
     patch_color="#28252C",
     label_color="#FFFFFF",
     label_fontsize=8,
