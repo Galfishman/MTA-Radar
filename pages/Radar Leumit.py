@@ -194,7 +194,7 @@ fig, ax = radar.plot_radar(
 
 # Manually add the third title if it exists
 if title_name3:
-    fig.text(0.5, 0.96, title_name3, ha='center', fontsize=12, color='red')
+    fig.text(0.5, 0.96, title_name3, ha='center', fontsize=12, color='red',weight='bold')
 st.pyplot(fig)
 
 head_to_head_df = pd.DataFrame({
