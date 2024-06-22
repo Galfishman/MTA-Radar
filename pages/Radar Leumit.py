@@ -2,23 +2,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import streamlit as st
 from soccerplots.radar_chart import Radar
-from mplsoccer import PyPizza
-import matplotlib as mpl
-import seaborn as sns
-from seaborn import swarmplot
-import numpy as np
-from scipy import stats
-import math
 import matplotlib as mpl
 
 # Set the default font family for Matplotlib
-
+mpl.rcParams['figure.dpi'] = 2400
 
 st.title("MTA RADAR Comparison")
 # READ DATA
 df = pd.read_csv('https://raw.githubusercontent.com/Galfishman/MTA-Radar/main/pages/Leumit%20Players.csv')
 Team = "teamName"
-
 
 # Ensure 'Minutes played' is numeric and handle non-numeric gracefully
 df['Minutes played'] = pd.to_numeric(df['Minutes played'], errors='coerce')
@@ -59,7 +51,6 @@ else:
 
 players_list = filtered_players["Player"].unique()
 
-
 Name = st.sidebar.selectbox(
     "Select the Player:",
     options=players_list,
@@ -67,11 +58,15 @@ Name = st.sidebar.selectbox(
 
 Name2 = st.sidebar.selectbox(
     "Select other Player:",
-    options=["League Average"] +filtered_players["Player"].unique().tolist(),
+    options=["League Average"] + filtered_players["Player"].unique().tolist(),
 )
 
+Name3 = st.sidebar.selectbox(
+    "Select third Player (optional):",
+    options=["None"] + filtered_players["Player"].unique().tolist(),
+    index=0  # Default to "None"
+)
 
-    
 # List of all available parameters
 all_params = list(df.columns[9:])
 
@@ -88,14 +83,13 @@ with st.expander("Show Players Table"):
     selected_columns = ['Player','Team','Minutes played','Position'] + selected_params
     st.dataframe(filtered_players[selected_columns])
 
-
 # add ranges to list of tuple pairs
 ranges = []
 a_values = []
 b_values = []
+c_values = []
 
 for x in params:
-
     a = min(df[x])
     a = a - (a * 0.2)
 
@@ -109,7 +103,8 @@ for _, row in df.iterrows():
         a_values = row[params].tolist()
     if row['Player'] == Name2:
         b_values = row[params].tolist()
-
+    if Name3 != "None" and row['Player'] == Name3:
+        c_values = row[params].tolist()
 
 if Name2 == "League Average":
     league_average_values = filtered_players[filtered_players['Player'] != Name][params].mean().tolist()
@@ -127,9 +122,26 @@ else:
         st.error(f"No data available for player: {Name2}")
         st.stop()
 
+if Name3 != "None":
+    player3_row = df[df['Player'] == Name3]
+    if not player3_row.empty:
+        minutes_player3 = player3_row['Minutes played'].values[0]
+        Position_name3 = player3_row['Position'].values[0]
+        team_name3 = player3_row['Team'].values[0]
+        c_values = player3_row[params].values[0].tolist()
+        title_name3 = f"{Name3}\n{'Team:  ' + team_name3}\n{'Position: ' + Position_name3}\n{minutes_player3} Minutes Played"
+    else:
+        st.error(f"No data available for player: {Name3}")
+        st.stop()
+else:
+    title_name3 = None
+    c_values = []
+
 a_values = a_values[:]
 b_values = b_values[:]
 values = [a_values, b_values]
+if c_values:
+    values.append(c_values)
 
 # Print values for troubleshooting
 minutes_name = "Minutes played"
@@ -145,10 +157,14 @@ team_name1 = filtered_players.loc[filtered_players['Player'] == Name, Team_name]
 title = dict(
     title_name=f"{Name}\n{'Team: ' + team_name1}\n{'Position: '+Position_name1}\n{minutes_player1} Minutes Played",
     title_color='yellow',
-    title_name_2= title_name2,
+    title_name_2=title_name2,
     title_color_2='blue',
     title_fontsize=12,
 )
+
+if title_name3:
+    title["title_name_3"] = title_name3
+    title["title_color_3"] = 'green'
 
 # RADAR PLOT
 radar = Radar(
@@ -164,22 +180,20 @@ fig, ax = radar.plot_radar(
     ranges=ranges,
     params=params,
     values=values,
-    radar_color=['yellow', 'blue'],
+    radar_color=['yellow', 'blue', 'green'] if c_values else ['yellow', 'blue'],
     edgecolor="#222222",
     zorder=2,
     linewidth=1,
     title=title,
-    alphas=[0.4, 0.4],
+    alphas=[0.4, 0.4, 0.4] if c_values else [0.4, 0.4],
     compare=True
 )
-
-mpl.rcParams['figure.dpi'] = 2400
 
 st.pyplot(fig)
 
 head_to_head_df = pd.DataFrame({
-    'Player': [Name, Name2],
-    **{param: [a_values[i], b_values[i]] for i, param in enumerate(params)}
+    'Player': [Name, Name2] + ([Name3] if Name3 != "None" else []),
+    **{param: [a_values[i], b_values[i]] + ([c_values[i]] if c_values else []) for i, param in enumerate(params)}
 })
 
 # Transpose the DataFrame to have parameters as rows
@@ -193,4 +207,3 @@ highlighted_df = head_to_head_df_transposed.style.format("{:.2f}").apply(lambda 
 
 st.header("Head-to-Head Comparison")
 st.table(highlighted_df)
-
