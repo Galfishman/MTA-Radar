@@ -122,7 +122,7 @@ else:
         Position_name2 = player2_row['Position'].values[0]
         team_name2 = player2_row['Team'].values[0]
         b_values = player2_row[params].values[0].tolist()
-        title_name2 = f"{Name2}\n{'Position: ' + Position_name2}\n{'Team:  ' + team_name2}\n{minutes_player2} Minutes Played"
+        title_name2 = f"{Name2}\n{'Team:  ' + team_name2}\n{'Position: ' + Position_name2}\n{minutes_player2} Minutes Played"
     else:
         st.error(f"No data available for player: {Name2}")
         st.stop()
@@ -143,7 +143,7 @@ team_name1 = filtered_players.loc[filtered_players['Player'] == Name, Team_name]
 
 # Update the title dictionary with minutes played
 title = dict(
-    title_name=f"{Name}\n{'Team: ' + team_name1}\n{Position_name1}\n{minutes_player1} Minutes Played",
+    title_name=f"{Name}\n{'Team: ' + team_name1}\n{'Position: '+Position_name1}\n{minutes_player1} Minutes Played",
     title_color='yellow',
     title_name_2= title_name2,
     title_color_2='blue',
