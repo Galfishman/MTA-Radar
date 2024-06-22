@@ -158,7 +158,7 @@ title = dict(
     title_name=f"{Name}\n{'Team: ' + team_name1}\n{'Position: '+Position_name1}\n{minutes_player1} Minutes Played",
     title_color='yellow',
     title_name_2=title_name2,
-    title_name3=title_name3
+    title_name3=title_name3,
     title_color_2='blue',
     title_color_3='green',
 
@@ -183,7 +183,7 @@ fig, ax = radar.plot_radar(
     ranges=ranges,
     params=params,
     values=values,
-    radar_color=['yellow', 'blue', 'green'] if c_values else ['yellow', 'blue'],
+    radar_color=['yellow', 'blue', 'red'] if c_values else ['yellow', 'blue'],
     edgecolor="#222222",
     zorder=2,
     linewidth=1,
